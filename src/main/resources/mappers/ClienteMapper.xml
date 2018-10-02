@@ -5,6 +5,67 @@
   
 <mapper namespace="edu.eci.pdsw.sampleprj.dao.mybatis.mappers.ClienteMapper">
 
-
-          	
+	<select parameterType="map" id="consultarClientes" resultMap="ClienteResult">
+			select
+			c.nombre AS clienteNombre,
+			c.documento,
+			c.telefono,
+			c.direccion,
+			c.email,
+			c.vetado,    
+			ir.id as itemRentadoID,
+			ir.fechainiciorenta,
+			ir.fechafinrenta,   
+			i.id as itemID,
+			i.nombre AS itemNombre,
+			i.descripcion as itemDescripcion,
+			i.fechalanzamiento,
+			i.tarifaxdia,
+			i.formatorenta,
+			i.genero,
+			ti.id as tipoItemID,
+			ti.descripcion  as tipoItemDescripcion
+			FROM VI_CLIENTES as c 
+			left join VI_ITEMRENTADO as ir on c.documento=ir.CLIENTES_documento 
+			left join VI_ITEMS as i on ir.ITEMS_id=i.id 
+			left join VI_TIPOITEM as ti on i.TIPOITEM_id=ti.id 
+	</select>
+    
+	<resultMap id = "ClienteResult" type = "Cliente">
+		<id property = "documento" column = "documento"/>
+		<result property = "nombre" column = "clienteNombre"/>
+		<result property = "telefono" column = "telefono"/>
+		<result property = "direccion" column = "direccion"/>
+		<result property = "email" column = "email"/>
+		<result property = "vetado" column = "vetado"/>
+		<collection property='rentados' ofType='ItemRentado' resultMap="ItemRentadoResult"></collection>
+	</resultMap>
+	
+	 
+	<resultMap id = "ItemResult" type = "Item">
+		<id property = "id" column = "itemID"/>
+		<result property = "nombre" column = "itemNombre"/>
+		<result property = "descripcion" column = "itemDescripcion"/>
+		<result property = "fechaLanzamiento" column = "fechalanzamiento"/>
+		<result property = "tarifaxDia" column = "tarifaxdia"/>
+		<result property = "formatoRenta" column = "formatorenta"/>
+		<result property = "genero" column = "genero"/>
+		<association property="tipo" javaType="TipoItem"></association>      
+	</resultMap>
+	
+	
+	<resultMap id="ItemRentadoResult"  type="ItemRentado"  >
+		<id property = "id" column = "itemRentadoID"/>
+		<result property = "fechainiciorenta" column = "fechainiciorenta"/>
+		<result property = "fechafinrenta" column = "fechafinrenta"/>
+		<association property="item" javaType="Item"></association>  
+	</resultMap>
+	
+	
+	<resultMap type="TipoItem" id="TipoItemResult">
+		<id property="id" column="tipoItemID"/>
+		<result property="descripcion" column="tipoItemDescripcion"/>
+	</resultMap>
+	
+	
 </mapper>

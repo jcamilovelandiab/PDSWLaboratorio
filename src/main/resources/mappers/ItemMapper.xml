@@ -4,7 +4,42 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="edu.eci.pdsw.sampleprj.dao.mybatis.mappers.ItemMapper">
-
+		<select parameterType="map" id="consultarClientes" resultMap="ClienteResult">
+			select
+			c.nombre,
+			c.documento,
+			c.telefono,
+			c.direccion,
+			c.email,
+			c.vetado,    
+			ir.id,
+			ir.fechainiciorenta,
+			ir.fechafinrenta,    
+			i.id ,
+			i.nombre,
+			i.descripcion,
+			i.fechalanzamiento,
+			i.tarifaxdia,
+			i.formatorenta,
+			i.genero,        
+			ti.id,
+			ti.descripcion     
+			FROM VI_CLIENTES as c 
+			left join VI_ITEMRENTADO as ir on c.documento=ir.CLIENTES_documento 
+			left join VI_ITEMS as i on ir.ITEMS_id=i.id 
+			left join VI_TIPOITEM as ti on i.TIPOITEM_id=ti.id 
+	</select>
+    
+	<resultMap id = "ClienteResult" type = "Item">
+		<id property = "id" column = "id"/>
+		<result property = "nombre" column = "nombre"/>
+		<result property = "descripcion" column = "descripcion"/>
+		<result property = "fechaLanzamiento" column = "fechalanzamiento"/>
+		<result property = "tarifaxDia" column = "tarifaxdia"/>
+		<result property = "formatoRenta" column = "formatorenta"/>
+		<result property = "genero" column = "genero"/>
+		<association property="tipo" javaType="TipoItem"></association>      
+	</resultMap>
 
     
     
