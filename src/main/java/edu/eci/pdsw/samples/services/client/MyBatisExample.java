@@ -20,11 +20,16 @@ package edu.eci.pdsw.samples.services.client;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Date;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
+import org.h2.util.ToDateParser;
 
 import edu.eci.pdsw.sampleprj.dao.mybatis.mappers.ClienteMapper;
 
@@ -58,14 +63,21 @@ public class MyBatisExample {
      * Programa principal de ejempo de uso de MyBATIS
      * @param args
      * @throws SQLException 
+     * @throws ParseException 
      */
-    public static void main(String args[]) throws SQLException {
+    public static void main(String args[]) throws SQLException, ParseException {
         SqlSessionFactory sessionfact = getSqlSessionFactory();
 
         SqlSession sqlss = sessionfact.openSession();
 
-     
+   
         ClienteMapper cm=sqlss.getMapper(ClienteMapper.class);
+        SimpleDateFormat dateformat2 = new SimpleDateFormat("dd-M-yyyy");
+        String strdateInicio = "02-04-2011";
+        Date newdateInicio = dateformat2.parse(strdateInicio);
+        String strdateFin = "02-05-2015";
+        Date newdateFin = dateformat2.parse(strdateInicio);
+        //cm.agregarItemRentadoACliente(22,1321,newdateInicio,newdateFin);
         System.out.println(cm.consultarClientes());
         
         

@@ -28,8 +28,46 @@
 			FROM VI_CLIENTES as c 
 			left join VI_ITEMRENTADO as ir on c.documento=ir.CLIENTES_documento 
 			left join VI_ITEMS as i on ir.ITEMS_id=i.id 
-			left join VI_TIPOITEM as ti on i.TIPOITEM_id=ti.id 
+			left join VI_TIPOITEM as ti on i.TIPOITEM_id=ti.id
 	</select>
+	
+	
+	<select parameterType="map" id="consultarCliente" resultMap="ClienteResult">
+			select
+			c.nombre AS clienteNombre,
+			c.documento,
+			c.telefono,
+			c.direccion,
+			c.email,
+			c.vetado,    
+			ir.id as itemRentadoID,
+			ir.fechainiciorenta,
+			ir.fechafinrenta,   
+			i.id as itemID,
+			i.nombre AS itemNombre,
+			i.descripcion as itemDescripcion,
+			i.fechalanzamiento,
+			i.tarifaxdia,
+			i.formatorenta,
+			i.genero,
+			ti.id as tipoItemID,
+			ti.descripcion  as tipoItemDescripcion
+			FROM VI_CLIENTES as c 
+			left join VI_ITEMRENTADO as ir on c.documento=ir.CLIENTES_documento 
+			left join VI_ITEMS as i on ir.ITEMS_id=i.id 
+			left join VI_TIPOITEM as ti on i.TIPOITEM_id=ti.id
+			where c.documento = #{idcli}
+	</select>
+	
+	<insert id="agregarItemRentadoACliente">
+		INSERT INTO VI_ITEMRENTADO(CLIENTES_documento,ITEMS_id,fechainiciorenta,fechafinrenta) 
+			VALUES (#{clienteID},#{itemRentadoIDIT},#{itemRentadoFechainicio},#{itemRentadoFechaFin})
+	</insert>
+	
+	
+	
+	
+	
     
 	<resultMap id = "ClienteResult" type = "Cliente">
 		<id property = "documento" column = "documento"/>
@@ -50,7 +88,7 @@
 		<result property = "tarifaxDia" column = "tarifaxdia"/>
 		<result property = "formatoRenta" column = "formatorenta"/>
 		<result property = "genero" column = "genero"/>
-		<association property="tipo" javaType="TipoItem"></association>      
+		<association property="tipo" javaType="TipoItem" resultMap="TipoItemResult"></association>      
 	</resultMap>
 	
 	
@@ -58,7 +96,7 @@
 		<id property = "id" column = "itemRentadoID"/>
 		<result property = "fechainiciorenta" column = "fechainiciorenta"/>
 		<result property = "fechafinrenta" column = "fechafinrenta"/>
-		<association property="item" javaType="Item"></association>  
+		<association property="item" javaType="Item" resultMap="ItemResult"></association>  
 	</resultMap>
 	
 	

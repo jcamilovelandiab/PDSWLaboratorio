@@ -11,20 +11,20 @@ import org.apache.ibatis.annotations.Param;
  */
 public interface ClienteMapper {
     
-    public Cliente consultarCliente(int id); 
+    public Cliente consultarCliente(@Param("idcli") int id); 
     
     /**
      * Registrar un nuevo item rentado asociado al cliente identificado
      * con 'idc' y relacionado con el item identificado con 'idi'
-     * @param id
-     * @param idit
+     * @param idc
+     * @param idi
      * @param fechainicio
      * @param fechafin 
      */
-    public void agregarItemRentadoACliente(int id, 
-            int idit, 
-            Date fechainicio,
-            Date fechafin);
+    public void agregarItemRentadoACliente(@Param("clienteID") int idc,
+    		@Param("itemRentadoIDIT")  int idi, 
+            @Param("itemRentadoFechainicio") Date fechainicio,
+            @Param("itemRentadoFechaFin") Date fechafin);
 
     /**
      * Consultar todos los clientes
