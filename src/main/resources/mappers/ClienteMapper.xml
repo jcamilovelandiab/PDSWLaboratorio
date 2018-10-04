@@ -80,30 +80,16 @@
 	</resultMap>
 	
 	 
-	<resultMap id = "ItemResult" type = "Item">
-		<id property = "id" column = "itemID"/>
-		<result property = "nombre" column = "itemNombre"/>
-		<result property = "descripcion" column = "itemDescripcion"/>
-		<result property = "fechaLanzamiento" column = "fechalanzamiento"/>
-		<result property = "tarifaxDia" column = "tarifaxdia"/>
-		<result property = "formatoRenta" column = "formatorenta"/>
-		<result property = "genero" column = "genero"/>
-		<association property="tipo" javaType="TipoItem" resultMap="TipoItemResult"></association>      
-	</resultMap>
 	
 	
 	<resultMap id="ItemRentadoResult"  type="ItemRentado"  >
 		<id property = "id" column = "itemRentadoID"/>
 		<result property = "fechainiciorenta" column = "fechainiciorenta"/>
 		<result property = "fechafinrenta" column = "fechafinrenta"/>
-		<association property="item" javaType="Item" resultMap="ItemResult"></association>  
+		<association property="item" javaType="Item" resultMap="edu.eci.pdsw.sampleprj.dao.mybatis.mappers.ItemMapper.ItemResult"></association>  
 	</resultMap>
 	
 	
-	<resultMap type="TipoItem" id="TipoItemResult">
-		<id property="id" column="tipoItemID"/>
-		<result property="descripcion" column="tipoItemDescripcion"/>
-	</resultMap>
 	
 	
 </mapper>

@@ -22,7 +22,8 @@ public class Item implements Serializable{
     private String formatoRenta;
     private String genero;
 
-    public Item(TipoItem tipo, int id, String nombre, String descripcion, Date fechaLanzamiento, long tarifaxDia, String formatoRenta, String genero) {
+    public Item(TipoItem tipo, int id, String nombre, String descripcion, 
+    Date fechaLanzamiento, long tarifaxDia, String formatoRenta, String genero) {
         this.tipo = tipo;
         this.id = id;
         this.nombre = nombre;

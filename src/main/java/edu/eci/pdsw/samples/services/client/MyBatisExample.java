@@ -32,6 +32,9 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.h2.util.ToDateParser;
 
 import edu.eci.pdsw.sampleprj.dao.mybatis.mappers.ClienteMapper;
+import edu.eci.pdsw.sampleprj.dao.mybatis.mappers.ItemMapper;
+import edu.eci.pdsw.samples.entities.Item;
+import edu.eci.pdsw.samples.entities.TipoItem;
 
 /**
  *
@@ -67,24 +70,41 @@ public class MyBatisExample {
      */
     public static void main(String args[]) throws SQLException, ParseException {
         SqlSessionFactory sessionfact = getSqlSessionFactory();
-
         SqlSession sqlss = sessionfact.openSession();
 
    
-        ClienteMapper cm=sqlss.getMapper(ClienteMapper.class);
-        SimpleDateFormat dateformat2 = new SimpleDateFormat("dd-M-yyyy");
-        String strdateInicio = "02-04-2011";
-        Date newdateInicio = dateformat2.parse(strdateInicio);
-        String strdateFin = "02-05-2015";
-        Date newdateFin = dateformat2.parse(strdateInicio);
-        //cm.agregarItemRentadoACliente(22,1321,newdateInicio,newdateFin);
-        System.out.println(cm.consultarClientes());
+        
+        /* 	Punto 3 
+         *  ClienteMapper cm =sqlss.getMapper(ClienteMapper.class);
+         *	SimpleDateFormat dateformat2 = new SimpleDateFormat("dd-M-yyyy");
+         * String strdateInicio = "02-04-2011";
+	     *  Date newdateInicio = dateformat2.parse(strdateInicio);
+	     *   String strdateFin = "02-05-2015";
+	     *  Date newdateFin = dateformat2.parse(strdateInicio);
+	     *  cm.agregarItemRentadoACliente(22,1321,newdateInicio,newdateFin);
+        */
+        
+        
+        /*
+         * Punto 4
+         *      ItemMapper im = sqlss.getMapper(ItemMapper.class);
+         *		Item newItem;
+         *		TipoItem  tipoItem = new TipoItem(15,"Soy el nuevo Item de John Prueba1");
+         * 		SimpleDateFormat dateformat2 = new SimpleDateFormat("yyyy-M-dd");
+    	 *		String strdateInicio = "2011-02-04";
+    	 * 		Date newdateStart = dateformat2.parse(strdateInicio);
+         *		newItem = new Item(tipoItem,103,"JohnItem1","SoyElNuevo",newdateStart,11111110, "FormatoRenta","M");
+         *		im.insertarItem(newItem);
+         * 		System.out.println(im.consultarItems());
+         * 
+         */
+    
+        
+       
         
         
         
         sqlss.commit();
-        
-        
         sqlss.close();
 
         
