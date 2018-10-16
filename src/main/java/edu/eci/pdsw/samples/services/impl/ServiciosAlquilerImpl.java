@@ -40,7 +40,7 @@ public class ServiciosAlquilerImpl implements ServiciosAlquiler {
    @Override
    public List<ItemRentado> consultarItemsCliente(long docuCliente) throws ExcepcionServiciosAlquiler {
        try {
-           return clienteDAO.load(docuCliente).getRentados();
+           return clienteDAO.consultarItemsCliente(docuCliente);
        } catch (PersistenceException ex) {
            throw new ExcepcionServiciosAlquiler("Error al consultar el cliente "+docuCliente);
        }

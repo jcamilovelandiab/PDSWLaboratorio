@@ -23,38 +23,49 @@
         <select parameterType="map" id="consultarItem" resultMap="ItemResult">
                             SELECT
                             i.id ,
-                            i.nombre ,
+                            i.nombre as itemNombre ,
                             i.descripcion ,
                             i.fechalanzamiento ,
                             i.tarifaxdia ,
                             i.formatorenta ,
                             i.genero ,        
-                            ti.id ,
-                            ti.descripcion     
+                            ti.id as tipoItemID,
+                            ti.descripcion  as tipoItemDescripcion    
                             FROM VI_ITEMS as i,VI_TIPOITEM as ti
                             WHERE  i.TIPOITEM_id=ti.id and i.id = #{id};
         </select>
     
-        <select parameterType="map" id="consultarItemsDisponibles"  resultMap="consultarItemsDisponiblesResult">
+        <select parameterType="map" id="consultarItemsDisponibles"  resultMap="ItemResult">
                         SELECT  
                         i.id ,
-                        i.nombre ,
+                        i.nombre as   itemNombre,
                         i.descripcion ,
                         i.fechalanzamiento ,
                         i.tarifaxdia ,
                         i.formatorenta ,
                         i.genero ,        
-                        ti.id ,
-                        ti.descripcion     
+                        ti.id as tipoItemID ,
+                        ti.descripcion as tipoItemDescripcion    
                         FROM VI_ITEMS as i,VI_TIPOITEM as ti
                         WHERE  i.TIPOITEM_id=ti.id and  i.id NOT IN (SELECT id FROM VI_ITEMRENTADO)
         </select>
-        
+      
+      	
+      	
         <select id="consultarMultaAlquiler" resultType="java.lang.Long">
-            SELECT DATEDIFF(#{fechaDevolucion},(SELECT fechafinrenta FROM VI_ITEMRENTADO WHERE id=#{iditem}))* 
-            (SELECT tarifaxdia FROM VI_ITEMS it WHERE it.id=#{iditem}) 
+            SELECT DATEDIFF(#{fechaDevolucion},(SELECT fechafinrenta FROM VI_ITEMRENTADO itr, VI_ITEMS it WHERE itr.ITEMS_id=it.id AND it.id=#{idItem}))*
+			(SELECT tarifaxdia FROM VI_ITEMS it WHERE it.id=#{idItem}) as multa
+            
+        </select>
+        
+        <select id="consultarCostoAlquiler" resultType="java.lang.Long">
+        	SELECT (SELECT it.tarifaxdia FROM VI_ITEMS it WHERE it.id=#{idItem})*#{numDias} as costo
         </select>
 
+
+		<update id="actualizarTarifaItem">
+				UPDATE VI_ITEMS it SET it.tarifaxdia=#{tarifa} WHERE it.id=#{idItem};
+		</update>
 
 
         <resultMap id = "ItemResult" type = "Item">

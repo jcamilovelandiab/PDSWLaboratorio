@@ -101,15 +101,13 @@ public class MyBatisExample {
     
         
         SimpleDateFormat dateformat2 = new SimpleDateFormat("yyyy-M-dd");
-    	String strdateInicio = "2018-10-01";
+    	String strdateInicio = "3917-04-30";
     	Date newdateStart = dateformat2.parse(strdateInicio);
         ItemMapper im = sqlss.getMapper(ItemMapper.class);
+        //System.out.println(im.consultarCostoAlquiler(90,5));
+       im.actualizarTarifaItem(1, 2000);
         
-        System.out.println(im.consultarMultaAlquiler(90,newdateStart));
-       
-        
-        
-        
+
         sqlss.commit();
         sqlss.close();
 

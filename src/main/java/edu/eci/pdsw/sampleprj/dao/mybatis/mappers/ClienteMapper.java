@@ -1,6 +1,8 @@
 package edu.eci.pdsw.sampleprj.dao.mybatis.mappers;
 
 import edu.eci.pdsw.samples.entities.Cliente;
+import edu.eci.pdsw.samples.entities.ItemRentado;
+
 import java.util.Date;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
@@ -11,7 +13,7 @@ import org.apache.ibatis.annotations.Param;
  */
 public interface ClienteMapper {
     
-    public Cliente consultarCliente(@Param("docucli") long docu); 
+    public Cliente consultarCliente(@Param("idcli") long docu); 
     
     /**
      * Registrar un nuevo item rentado asociado al cliente identificado
@@ -44,5 +46,7 @@ public interface ClienteMapper {
      * @param estado 
      */
     public void vetarCliente(@Param("docucli")long docu,@Param("estado") boolean estado);
+
+	public List<ItemRentado> consultarItemsCliente(@Param("docuCliente") long docuCliente);
     
 }

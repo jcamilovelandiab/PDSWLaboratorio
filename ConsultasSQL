@@ -103,8 +103,8 @@ consultarItemsDisponibles
     WHERE  i.TIPOITEM_id=ti.id and  i.id NOT IN (SELECT id FROM VI_ITEMRENTADO);
 
 consultarMultaAlquiler
-SELECT DATEDIFF(fechaDevolucion,(SELECT fechafinrenta FROM VI_ITEMRENTADO WHERE id=iditem))* 
-(SELECT tarifaxdia FROM VI_ITEMS it WHERE it.id=iditem) as multa;
+SELECT DATEDIFF("3917-04-30",(SELECT fechafinrenta FROM VI_ITEMRENTADO itr, VI_ITEMS it WHERE itr.ITEMS_id=it.id AND it.id=90))*
+(SELECT tarifaxdia FROM VI_ITEMS it WHERE it.id=90) as multa
 
 consultarTipoItem
 	select  

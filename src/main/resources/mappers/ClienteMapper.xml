@@ -50,14 +50,38 @@
 			i.tarifaxdia,
 			i.formatorenta,
 			i.genero,
-			ti.id as tipoItemID,
-			ti.descripcion  as tipoItemDescripcion
+			ti.id ,
+			ti.descripcion  
 			FROM VI_CLIENTES as c 
 			left join VI_ITEMRENTADO as ir on c.documento=ir.CLIENTES_documento 
 			left join VI_ITEMS as i on ir.ITEMS_id=i.id 
 			left join VI_TIPOITEM as ti on i.TIPOITEM_id=ti.id
 			where c.documento = #{idcli}
 	</select>
+	
+	<select id="consultarItemsCliente" parameterType="map" resultMap="ItemRentadoResult">
+		select       
+	    ir.id ,
+	    ir.fechainiciorenta ,
+	    ir.fechafinrenta ,    
+	    i.id ,
+	    i.nombre as itemNombre,
+	    i.descripcion ,
+	    i.fechalanzamiento ,
+	    i.tarifaxdia ,
+	    i.formatorenta ,
+	    i.genero ,        
+	    ti.id as tipoItemID ,
+	    ti.descripcion     as tipoItemDescripcion
+	    FROM VI_CLIENTES as c 
+	    left join VI_ITEMRENTADO as ir on c.documento=ir.CLIENTES_documento 
+	    left join VI_ITEMS as i on ir.ITEMS_id=i.id 
+	    left join VI_TIPOITEM as ti on i.TIPOITEM_id=ti.id 
+		WHERE c.documento=#{docuCliente}
+	</select>
+	
+	
+	
 	
 	<insert id="agregarItemRentadoACliente">
 		INSERT INTO VI_ITEMRENTADO(CLIENTES_documento,ITEMS_id,fechainiciorenta,fechafinrenta) 
@@ -70,6 +94,11 @@
 		VALUES (#{cliente.documento},#{cliente.nombre},#{cliente.telefono},#{cliente.direccion},#{cliente.email},#{cliente.vetado})
 		
 	</insert>
+	
+	<update id="vetarCliente">
+		UPDATE VI_CLIENTES c
+		SET c.vetado=#{estado} WHERE c.documento=#{docucli}
+	</update>
 	
 	
 	<resultMap id = "ClienteResult" type = "Cliente">
