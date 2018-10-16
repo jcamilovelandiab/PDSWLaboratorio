@@ -20,42 +20,63 @@
 	</select>
     
     
-    <select parameterType="map" id="consultarItem" resultMap="ItemResult">
-			SELECT  vi.id as itemID,
-				ti.descripcion as tipoItemDescripcion,
-				vi.nombre as itemNombre,
-				vi.descripcion as itemDescripcion,
-				vi.fechaLanzamiento,
-				vi.tarifaxdia,
-				vi.formatorenta,
-				vi.genero,
-				vi.id as tipoItemID	
-			FROM VI_ITEMS as vi , VI_TIPOITEM as ti 
-			WHERE vi.id = ti.id and vi.id = #{id}
-	</select>
+        <select parameterType="map" id="consultarItem" resultMap="ItemResult">
+                            SELECT
+                            i.id ,
+                            i.nombre ,
+                            i.descripcion ,
+                            i.fechalanzamiento ,
+                            i.tarifaxdia ,
+                            i.formatorenta ,
+                            i.genero ,        
+                            ti.id ,
+                            ti.descripcion     
+                            FROM VI_ITEMS as i,VI_TIPOITEM as ti
+                            WHERE  i.TIPOITEM_id=ti.id and i.id = #{id};
+        </select>
     
+        <select parameterType="map" id="consultarItemsDisponibles"  resultMap="consultarItemsDisponiblesResult">
+                        SELECT  
+                        i.id ,
+                        i.nombre ,
+                        i.descripcion ,
+                        i.fechalanzamiento ,
+                        i.tarifaxdia ,
+                        i.formatorenta ,
+                        i.genero ,        
+                        ti.id ,
+                        ti.descripcion     
+                        FROM VI_ITEMS as i,VI_TIPOITEM as ti
+                        WHERE  i.TIPOITEM_id=ti.id and  i.id NOT IN (SELECT id FROM VI_ITEMRENTADO)
+        </select>
+        
+        <select id="consultarMultaAlquiler" resultType="java.lang.Long">
+            SELECT DATEDIFF(#{fechaDevolucion},(SELECT fechafinrenta FROM VI_ITEMRENTADO WHERE id=#{iditem}))* 
+            (SELECT tarifaxdia FROM VI_ITEMS it WHERE it.id=#{iditem}) 
+        </select>
 
-    
-    <resultMap id = "ItemResult" type = "Item">
-		<id property = "id" column = "itemID"/>
-		<result property = "nombre" column = "itemNombre"/>
-		<result property = "descripcion" column = "itemDescripcion"/>
-		<result property = "fechaLanzamiento" column = "fechalanzamiento"/>
-		<result property = "tarifaxDia" column = "tarifaxdia"/>
-		<result property = "formatoRenta" column = "formatorenta"/>
-		<result property = "genero" column = "genero"/>
-		<association property="tipo" javaType="TipoItem" resultMap="edu.eci.pdsw.sampleprj.dao.mybatis.mappers.TipoItemMapper.TipoItemResult"></association>      
-	</resultMap>
 
-	
-	<insert id="insertarItem">
-		INSERT INTO VI_ITEMS(
-		  id, nombre , descripcion ,
-		 fechalanzamiento ,tarifaxdia , formatorenta , genero,TIPOITEM_id)
-		VALUES 
-		(#{item.id}, #{item.nombre}, #{item.descripcion},
-		 #{item.fechaLanzamiento},	 #{item.tarifaxDia} , #{item.formatoRenta},
-		 #{item.genero},#{item.tipo.id})
-	</insert>
+
+        <resultMap id = "ItemResult" type = "Item">
+                    <id property = "id" column = "itemID"/>
+                    <result property = "nombre" column = "itemNombre"/>
+                    <result property = "descripcion" column = "itemDescripcion"/>
+                    <result property = "fechaLanzamiento" column = "fechalanzamiento"/>
+                    <result property = "tarifaxDia" column = "tarifaxdia"/>
+                    <result property = "formatoRenta" column = "formatorenta"/>
+                    <result property = "genero" column = "genero"/>
+                    <association property="tipo" javaType="TipoItem" resultMap="edu.eci.pdsw.sampleprj.dao.mybatis.mappers.TipoItemMapper.TipoItemResult"></association>      
+        </resultMap>
+
+
+        <insert id="insertarItem">
+                    INSERT INTO VI_ITEMS(
+                      id, nombre , descripcion ,
+                     fechalanzamiento ,tarifaxdia , formatorenta , genero,TIPOITEM_id)
+                    VALUES 
+                    (#{item.id}, #{item.nombre}, #{item.descripcion},
+                     #{item.fechaLanzamiento},	 #{item.tarifaxDia} , #{item.formatoRenta},
+                     #{item.genero},#{item.tipo.id})
+        </insert>
 
 </mapper>

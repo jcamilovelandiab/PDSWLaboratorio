@@ -21,7 +21,7 @@ public interface ItemMapper {
 
     public List<Item> consultarItemsDisponibles();
     
-    public long consultarMultaAlquiler(@Param("idItem")int idItem, @Param("fechaDevolucion") java.util.Date fechaDevolucion);
+    public long consultarMultaAlquiler(@Param("idItem")int idItem, @Param("fechaDevolucion") Date fechaDevolucion);
     
     public long consultarCostoAlquiler(@Param("idItem")int idItem, @Param("numDias") int numDias);
     
