@@ -65,10 +65,13 @@
 	</insert>
 	
 	
+	<insert id="agregarCliente">
+		INSERT INTO VI_CLIENTES(documento,nombre,telefono,direccion,email,vetado) 
+		VALUES (#{cliente.documento},#{cliente.nombre},#{cliente.telefono},#{cliente.direccion},#{cliente.email},#{cliente.vetado})
+		
+	</insert>
 	
 	
-	
-    
 	<resultMap id = "ClienteResult" type = "Cliente">
 		<id property = "documento" column = "documento"/>
 		<result property = "nombre" column = "clienteNombre"/>
@@ -78,8 +81,6 @@
 		<result property = "vetado" column = "vetado"/>
 		<collection property='rentados' ofType='ItemRentado' resultMap="ItemRentadoResult"></collection>
 	</resultMap>
-	
-	 
 	
 	
 	<resultMap id="ItemRentadoResult"  type="ItemRentado"  >

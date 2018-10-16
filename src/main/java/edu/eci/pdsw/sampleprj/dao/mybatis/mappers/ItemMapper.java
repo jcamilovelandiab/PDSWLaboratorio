@@ -19,5 +19,11 @@ public interface ItemMapper {
     
     public void insertarItem(@Param("item") Item it);
 
-        
+    public List<Item> consultarItemsDisponibles();
+    
+    public long consultarMultaAlquiler(@Param("idItem")int idItem, @Param("fechaDevolucion") java.util.Date fechaDevolucion);
+    
+    public long consultarCostoAlquiler(@Param("idItem")int idItem, @Param("numDias") int numDias);
+    
+    public void actualizarTarifaItem(@Param("idItem") int idItem,@Param("tarifa") long tarifa);
 }

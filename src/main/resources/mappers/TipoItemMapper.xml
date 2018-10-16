@@ -10,5 +10,16 @@
 	</resultMap>
 
 
-                
+	<insert id="agregarTipoItem">
+		INSERT INTO VI_TIPOITEM(id, descripcion)
+			VALUES(#{tipoItem.id},#{tipoItem.descripcion});
+	</insert>
+	
+	<select parameterType="map" id="getTipoItem" resultMap="TipoItemResult">
+		SELECT
+		ti.id as tipoItemID , ti.descripcion as tipoItemDescripcion
+		FROM VI_TIPOITEM ti WHERE ti.id=#{id}
+	</select>
+	
+	        
 </mapper>

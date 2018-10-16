@@ -58,6 +58,4 @@
 		 #{item.genero},#{item.tipo.id})
 	</insert>
 
-    
-    
 </mapper>
