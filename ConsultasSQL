@@ -1,0 +1,140 @@
+valorMultaRetrasoxDia
+SELECT tarifaxdia FROM VI_ITEMS WHERE id=itemId;
+
+consultarCliente
+	select   
+    c.nombre,
+    c.documento,
+    c.telefono,
+    c.direccion,
+    c.email,
+    c.vetado,    
+    ir.id ,
+    ir.fechainiciorenta ,
+    ir.fechafinrenta ,    
+    i.id ,
+    i.nombre ,
+    i.descripcion ,
+    i.fechalanzamiento ,
+    i.tarifaxdia ,
+    i.formatorenta ,
+    i.genero ,        
+    ti.id ,
+    ti.descripcion     
+    FROM VI_CLIENTES as c 
+    left join VI_ITEMRENTADO as ir on c.documento=ir.CLIENTES_documento 
+    left join VI_ITEMS as i on ir.ITEMS_id=i.id 
+    left join VI_TIPOITEM as ti on i.TIPOITEM_id=ti.id 
+	WHERE c.documento=#{docu}
+	
+
+consultarItemsCliente
+	select       
+    ir.id ,
+    ir.fechainiciorenta ,
+    ir.fechafinrenta ,    
+    i.id ,
+    i.nombre ,
+    i.descripcion ,
+    i.fechalanzamiento ,
+    i.tarifaxdia ,
+    i.formatorenta ,
+    i.genero ,        
+    ti.id ,
+    ti.descripcion     
+    FROM VI_CLIENTES as c 
+    left join VI_ITEMRENTADO as ir on c.documento=ir.CLIENTES_documento 
+    left join VI_ITEMS as i on ir.ITEMS_id=i.id 
+    left join VI_TIPOITEM as ti on i.TIPOITEM_id=ti.id 
+	WHERE c.documento=#{docu}
+
+consultarClientes
+	select   
+    c.nombre,
+    c.documento,
+    c.telefono,
+    c.direccion,
+    c.email,
+    c.vetado,    
+    ir.id ,
+    ir.fechainiciorenta ,
+    ir.fechafinrenta ,    
+    i.id ,
+    i.nombre ,
+    i.descripcion ,
+    i.fechalanzamiento ,
+    i.tarifaxdia ,
+    i.formatorenta ,
+    i.genero ,        
+    ti.id ,
+    ti.descripcion     
+    FROM VI_CLIENTES as c 
+    left join VI_ITEMRENTADO as ir on c.documento=ir.CLIENTES_documento 
+    left join VI_ITEMS as i on ir.ITEMS_id=i.id 
+    left join VI_TIPOITEM as ti on i.TIPOITEM_id=ti.id 
+
+consultarItem
+	select  
+    i.id ,
+    i.nombre ,
+    i.descripcion ,
+    i.fechalanzamiento ,
+    i.tarifaxdia ,
+    i.formatorenta ,
+    i.genero ,        
+    ti.id ,
+    ti.descripcion     
+    FROM VI_ITEMS as i,VI_TIPOITEM as ti
+    WHERE  i.TIPOITEM_id=ti.id;
+	
+
+consultarItemsDisponibles
+	select  
+    i.id ,
+    i.nombre ,
+    i.descripcion ,
+    i.fechalanzamiento ,
+    i.tarifaxdia ,
+    i.formatorenta ,
+    i.genero ,        
+    ti.id ,
+    ti.descripcion     
+    FROM VI_ITEMS as i,VI_TIPOITEM as ti
+    WHERE  i.TIPOITEM_id=ti.id and  i.id NOT IN (SELECT id FROM VI_ITEMRENTADO);
+
+consultarMultaAlquiler
+SELECT DATEDIFF(fechaDevolucion,(SELECT fechafinrenta FROM VI_ITEMRENTADO WHERE id=iditem))* 
+(SELECT tarifaxdia FROM VI_ITEMS it WHERE it.id=iditem) as multa;
+
+consultarTipoItem
+	select  
+  	ti.id ,
+    ti.descripcion     
+    FROM VI_TIPOITEM as ti
+	WHERE ti.id = #{id};
+
+consultarTiposItem
+	select  
+  	ti.id,
+    ti.descripcion     
+    FROM VI_TIPOITEM as ti;
+
+registrarAlquilerCliente
+INSERT INTO VI_ITEMRENTADO(CLIENTES_documento, ITEMS_id, fechainiciorenta, fechafinrenta);
+VALUES(9843, 1, CURDATE(), DATE_ADD(CURDATE(), INTERVAL 2 DAY);
+
+consultarCostoAlquiler
+SELECT (SELECT it.tarifaxdia FROM VI_ITEMS it WHERE it.id=iditem)*numdias as costo;
+
+actualizarTarifaItem
+UPDATE VI_ITEMS it SET it.tarifaxdia=tarifa WHERE it.id=id;
+
+registrarItem
+INSERT INTO VI_ITEMS(nombre, descripcion, fechalanzamiento, tarifaxdia, formatorenta, genero, TIPOITEM_id)
+VALUES(i.getNombre(), i.getDescripcion(), i.getFechaLanzamiento(), i.getTarfiaxDia(), i.getFormatoRenta(),
+i.getGenero(), i.getTipo() );
+
+vetarCliente
+UPDATE VI_CLIENTES c
+SET c.vetado=estado WHERE c.documento=docu
+'
