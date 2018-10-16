@@ -10,7 +10,10 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import org.mybatis.guice.transactional.Transactional;
+
 @Singleton
+@Transactional
 public class ServiciosAlquilerImpl implements ServiciosAlquiler {
 
 	@Inject
