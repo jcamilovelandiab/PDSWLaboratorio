@@ -7,7 +7,7 @@ package edu.eci.pdsw.sampleprj.dao.mybatis.mappers;
 
 import org.apache.ibatis.annotations.Param;
 import edu.eci.pdsw.samples.entities.Item;
-import java.sql.Date;
+import java.util.Date;
 
 /**
  *
@@ -17,12 +17,12 @@ public interface ItemRentadoMapper{
 
     /**
      *
-     * @param date
+     * @param newdateStart
      * @param docu
      * @param item
      * @param numDias
      */
-    public void registrarAlquilerCliente(@Param("date")Date date,
+    public void registrarAlquilerCliente(@Param("date")Date newdateStart,
                                         @Param("docu")long docu,
                                         @Param("item")Item item,
                                         @Param("numDias")int numDias);

@@ -13,144 +13,145 @@ import java.util.logging.Logger;
 @Singleton
 public class ServiciosAlquilerImpl implements ServiciosAlquiler {
 
-   @Inject
-   private ItemDAO itemDAO;
-   private ClienteDAO clienteDAO;
-   private TipoItemDAO tipoItemDAO;
-   private ItemRentadoDAO itemRentadoDAO;
-   
-   @Override
-   public long valorMultaRetrasoxDia(int itemId) throws ExcepcionServiciosAlquiler{
-       try {
-           return itemDAO.load(itemId).getTarifaxDia();
-       } catch (PersistenceException ex) {
-           throw new ExcepcionServiciosAlquiler("Error al consultar el valor de la multa por dia del item "+itemId);
-       }
-   }
+	@Inject
+	private ItemDAO itemDAO;
+	private ClienteDAO clienteDAO;
+	private TipoItemDAO tipoItemDAO;
+	private ItemRentadoDAO itemRentadoDAO;
 
-   @Override
-   public Cliente consultarCliente(long docu) throws ExcepcionServiciosAlquiler {
-       try {
-           return clienteDAO.load(docu);
-       } catch (PersistenceException ex) {
-           throw new ExcepcionServiciosAlquiler("Error al consultar el cliente "+docu);
-       }
-   }
+	@Override
+	public long valorMultaRetrasoxDia(int itemId) throws ExcepcionServiciosAlquiler {
+		try {
+			return itemDAO.load(itemId).getTarifaxDia();
+		} catch (PersistenceException ex) {
+			throw new ExcepcionServiciosAlquiler("Error al consultar el valor de la multa por dia del item " + itemId);
+		}
+	}
 
-   @Override
-   public List<ItemRentado> consultarItemsCliente(long docuCliente) throws ExcepcionServiciosAlquiler {
-       try {
-           return clienteDAO.consultarItemsCliente(docuCliente);
-       } catch (PersistenceException ex) {
-           throw new ExcepcionServiciosAlquiler("Error al consultar el cliente "+docuCliente);
-       }
-   }
+	@Override
+	public Cliente consultarCliente(long docu) throws ExcepcionServiciosAlquiler {
+		try {
+			return clienteDAO.load(docu);
+		} catch (PersistenceException ex) {
+			throw new ExcepcionServiciosAlquiler("Error al consultar el cliente " + docu);
+		}
+	}
 
-   @Override
-   public List<Cliente> consultarClientes() throws ExcepcionServiciosAlquiler {
-        try {
-            return clienteDAO.loadAll();
-         } catch (PersistenceException ex) {
-            throw new ExcepcionServiciosAlquiler("Error al consultar los clientes");
-        }
-   }
+	@Override
+	public List<ItemRentado> consultarItemsCliente(long docuCliente) throws ExcepcionServiciosAlquiler {
+		try {
+			return clienteDAO.consultarItemsCliente(docuCliente);
+		} catch (PersistenceException ex) {
+			throw new ExcepcionServiciosAlquiler("Error al consultar el cliente " + docuCliente);
+		}
+	}
 
-   @Override
-   public Item consultarItem(int id) throws ExcepcionServiciosAlquiler {
-       try {
-           return itemDAO.load(id);
-       } catch (PersistenceException ex) {
-           throw new ExcepcionServiciosAlquiler("Error al consultar el item "+id);
-       }
-   }
+	@Override
+	public List<Cliente> consultarClientes() throws ExcepcionServiciosAlquiler {
+		try {
+			return clienteDAO.loadAll();
+		} catch (PersistenceException ex) {
+			throw new ExcepcionServiciosAlquiler("Error al consultar los clientes");
+		}
+	}
 
-    @Override
-    public List<Item> consultarItemsDisponibles() throws ExcepcionServiciosAlquiler{
-        try {
-            return itemDAO.availableItems();
-        } catch (PersistenceException ex) {
-            throw new ExcepcionServiciosAlquiler("Error al consultar los items disponibles");
-        }
-    }
+	@Override
+	public Item consultarItem(int id) throws ExcepcionServiciosAlquiler {
+		try {
+			return itemDAO.load(id);
+		} catch (PersistenceException ex) {
+			throw new ExcepcionServiciosAlquiler("Error al consultar el item " + id);
+		}
+	}
 
-   
-   @Override
-   public long consultarMultaAlquiler(int idItem, Date fechaDevolucion) throws ExcepcionServiciosAlquiler {
-        try {
-            return itemDAO.consultarMultaAlquiler(idItem, fechaDevolucion);
-        } catch (PersistenceException ex) {
-            throw new ExcepcionServiciosAlquiler("Error al consultar la multa del alquiler");
-        }
-   }
+	@Override
+	public List<Item> consultarItemsDisponibles() throws ExcepcionServiciosAlquiler {
+		try {
+			return itemDAO.availableItems();
+		} catch (PersistenceException ex) {
+			throw new ExcepcionServiciosAlquiler("Error al consultar los items disponibles");
+		}
+	}
 
-   @Override
-   public TipoItem consultarTipoItem(int id) throws ExcepcionServiciosAlquiler {
-        try {
-            return tipoItemDAO.load(id);
-        }catch (PersistenceException ex) {
-            throw new ExcepcionServiciosAlquiler("Error al consultar el tipo item");
-        }
-   }
+	@Override
+	public long consultarMultaAlquiler(int idItem, Date fechaDevolucion) throws ExcepcionServiciosAlquiler {
+		try {
+			return itemDAO.consultarMultaAlquiler(idItem, fechaDevolucion);
+		} catch (PersistenceException ex) {
+			throw new ExcepcionServiciosAlquiler("Error al consultar la multa del alquiler");
+		}
+	}
 
-   @Override
-   public List<TipoItem> consultarTiposItem() throws ExcepcionServiciosAlquiler {
-        try {
-            return tipoItemDAO.loadAll();
-        }catch (PersistenceException ex) {
-            throw new ExcepcionServiciosAlquiler("Error al consultar los tipos item");
-        }
-   }
+	@Override
+	public TipoItem consultarTipoItem(int id) throws ExcepcionServiciosAlquiler {
+		try {
+			return tipoItemDAO.load(id);
+		} catch (PersistenceException ex) {
+			throw new ExcepcionServiciosAlquiler("Error al consultar el tipo item");
+		}
+	}
 
-   @Override
-   public void registrarAlquilerCliente(Date date, long docu, Item item, int numDias) throws ExcepcionServiciosAlquiler {
-        try {
-            itemRentadoDAO.registrarAlquilerCliente(date, docu,  item,  numDias);
-        }catch (PersistenceException ex) {
-            throw new ExcepcionServiciosAlquiler("Error al registrar el alquiler del cliente");
-        }
-   }
+	@Override
+	public List<TipoItem> consultarTiposItem() throws ExcepcionServiciosAlquiler {
+		try {
+			return tipoItemDAO.loadAll();
+		} catch (PersistenceException ex) {
+			throw new ExcepcionServiciosAlquiler("Error al consultar los tipos item");
+		}
+	}
 
-   @Override
-   public void registrarCliente(Cliente c) throws ExcepcionServiciosAlquiler {
-        try {
-            clienteDAO.save(c);
-        }catch (PersistenceException ex) {
-            throw new ExcepcionServiciosAlquiler("Error al registrar el cliente");
-        }
-   }
+	@Override
+	public void registrarAlquilerCliente(Date date, long docu, Item item, int numDias)
+			throws ExcepcionServiciosAlquiler {
+		try {
+			itemRentadoDAO.registrarAlquilerCliente(date, docu, item, numDias);
+		} catch (PersistenceException ex) {
+			throw new ExcepcionServiciosAlquiler("Error al registrar el alquiler del cliente");
+		}
+	}
 
-   @Override
-   public long consultarCostoAlquiler(int idItem, int numDias) throws ExcepcionServiciosAlquiler {
-        try {
-            return itemDAO.consultarCostoAlquiler(idItem, numDias);
-        }catch (PersistenceException ex) {
-            throw new ExcepcionServiciosAlquiler("Error al consultar el costo del alquiler "+idItem);
-        }
-   }
+	@Override
+	public void registrarCliente(Cliente c) throws ExcepcionServiciosAlquiler {
+		try {
+			clienteDAO.save(c);
+		} catch (PersistenceException ex) {
+			throw new ExcepcionServiciosAlquiler("Error al registrar el cliente");
+		}
+	}
 
-   @Override
-    public void actualizarTarifaItem(int idItem, long tarifa) throws ExcepcionServiciosAlquiler {
-        try {
-            itemDAO.actualizarTarifaItem(idItem, tarifa);
-        }catch (PersistenceException ex) {
-            throw new ExcepcionServiciosAlquiler("Error al actualizar la tarifa del item "+idItem);
-        }
-   }
-   @Override
-   public void registrarItem(Item it) throws ExcepcionServiciosAlquiler {
-        try {
-            itemDAO.save(it);
-        }catch (PersistenceException ex) {
-            throw new ExcepcionServiciosAlquiler("Error al registrar el item");
-        }
-   }
+	@Override
+	public long consultarCostoAlquiler(int idItem, int numDias) throws ExcepcionServiciosAlquiler {
+		try {
+			return itemDAO.consultarCostoAlquiler(idItem, numDias);
+		} catch (PersistenceException ex) {
+			throw new ExcepcionServiciosAlquiler("Error al consultar el costo del alquiler " + idItem);
+		}
+	}
 
-   @Override
-   public void vetarCliente(long docu, boolean estado) throws ExcepcionServiciosAlquiler {
-       try {
-            clienteDAO.vetarCliente(docu,estado);
-        }catch (PersistenceException ex) {
-            throw new ExcepcionServiciosAlquiler("Error al vetar el cliente "+docu);
-        }
-   }
+	@Override
+	public void actualizarTarifaItem(int idItem, long tarifa) throws ExcepcionServiciosAlquiler {
+		try {
+			itemDAO.actualizarTarifaItem(idItem, tarifa);
+		} catch (PersistenceException ex) {
+			throw new ExcepcionServiciosAlquiler("Error al actualizar la tarifa del item " + idItem);
+		}
+	}
+
+	@Override
+	public void registrarItem(Item it) throws ExcepcionServiciosAlquiler {
+		try {
+			itemDAO.save(it);
+		} catch (PersistenceException ex) {
+			throw new ExcepcionServiciosAlquiler("Error al registrar el item");
+		}
+	}
+
+	@Override
+	public void vetarCliente(long docu, boolean estado) throws ExcepcionServiciosAlquiler {
+		try {
+			clienteDAO.vetarCliente(docu, estado);
+		} catch (PersistenceException ex) {
+			throw new ExcepcionServiciosAlquiler("Error al vetar el cliente " + docu);
+		}
+	}
 }

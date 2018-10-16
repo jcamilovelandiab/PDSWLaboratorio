@@ -16,8 +16,6 @@
  */
 package edu.eci.pdsw.samples.services.client;
 
-
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Date;
@@ -33,6 +31,8 @@ import org.h2.util.ToDateParser;
 
 import edu.eci.pdsw.sampleprj.dao.mybatis.mappers.ClienteMapper;
 import edu.eci.pdsw.sampleprj.dao.mybatis.mappers.ItemMapper;
+import edu.eci.pdsw.sampleprj.dao.mybatis.mappers.ItemRentadoMapper;
+import edu.eci.pdsw.sampleprj.dao.mybatis.mappers.TipoItemMapper;
 import edu.eci.pdsw.samples.entities.Item;
 import edu.eci.pdsw.samples.entities.TipoItem;
 
@@ -42,27 +42,27 @@ import edu.eci.pdsw.samples.entities.TipoItem;
  */
 public class MyBatisExample {
 
-    /**
-     * Método que construye una fábrica de sesiones de MyBatis a partir del
-     * archivo de configuración ubicado en src/main/resources
-     *
-     * @return instancia de SQLSessionFactory
-     */
-    public static SqlSessionFactory getSqlSessionFactory() {
-        SqlSessionFactory sqlSessionFactory = null;
-        if (sqlSessionFactory == null) {
-            InputStream inputStream;
-            try {
-                inputStream = Resources.getResourceAsStream("mybatis-config.xml");
-                sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
-            } catch (IOException e) {
-                throw new RuntimeException(e.getCause());
-            }
-        }
-        return sqlSessionFactory;
-    }
+	/**
+	 * Método que construye una fábrica de sesiones de MyBatis a partir del archivo
+	 * de configuración ubicado en src/main/resources
+	 *
+	 * @return instancia de SQLSessionFactory
+	 */
+	public static SqlSessionFactory getSqlSessionFactory() {
+		SqlSessionFactory sqlSessionFactory = null;
+		if (sqlSessionFactory == null) {
+			InputStream inputStream;
+			try {
+				inputStream = Resources.getResourceAsStream("mybatis-config.xml");
+				sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+			} catch (IOException e) {
+				throw new RuntimeException(e.getCause());
+			}
+		}
+		return sqlSessionFactory;
+	}
 
-    /**
+	/**
      * Programa principal de ejempo de uso de MyBATIS
      * @param args
      * @throws SQLException 
@@ -103,10 +103,14 @@ public class MyBatisExample {
         SimpleDateFormat dateformat2 = new SimpleDateFormat("yyyy-M-dd");
     	String strdateInicio = "3917-04-30";
     	Date newdateStart = dateformat2.parse(strdateInicio);
-        ItemMapper im = sqlss.getMapper(ItemMapper.class);
+        ItemRentadoMapper im = sqlss.getMapper(ItemRentadoMapper.class);
         //System.out.println(im.consultarCostoAlquiler(90,5));
-       im.actualizarTarifaItem(1, 2000);
-        
+        //im.addTipoItem(new TipoItem(15,));
+        ItemMapper IT = sqlss.getMapper(ItemMapper.class);
+        ClienteMapper cl = sqlss.getMapper(ClienteMapper.class);
+        Item mm = IT.consultarItem(17);
+        System.out.println(cl.consultarClientes());
+        //im.registrarAlquilerCliente(newdateStart, Long.parseLong("12345"),mm,6);
 
         sqlss.commit();
         sqlss.close();
@@ -114,6 +118,5 @@ public class MyBatisExample {
         
         
     }
-
 
 }

@@ -22,7 +22,7 @@
     
         <select parameterType="map" id="consultarItem" resultMap="ItemResult">
                             SELECT
-                            i.id ,
+                            i.id as itemID,
                             i.nombre as itemNombre ,
                             i.descripcion ,
                             i.fechalanzamiento ,
@@ -37,7 +37,7 @@
     
         <select parameterType="map" id="consultarItemsDisponibles"  resultMap="ItemResult">
                         SELECT  
-                        i.id ,
+                        i.id as itemID ,
                         i.nombre as   itemNombre,
                         i.descripcion ,
                         i.fechalanzamiento ,
