@@ -19,10 +19,12 @@ public class GeneratorItem {
 		    Date fechaLanzamiento, long tarifaxDia, String formatoRenta, String genero) */
 	public static Gen<Item> Items() {
 		return GeneratorTipoItem.TiposItems()
-				.zip(ids(), nombres(), descripciones(), fechas(),tarifaGenerator(),formatoRentaGen(),generosGen(),												
-						(tipo, id, nombre, descripcion, fechaLanzamiento, tarifaxDia, formatoRenta, genero) -> 
-						new Item(tipo, id, nombre, descripcion, fechaLanzamiento, tarifaxDia, formatoRenta, genero));
+				.zip(ids(), nombres(), tarifaGenerator(),generosGen(),
+						(tipo, id, nombre,tarifas,generos) -> 
+						new Item(tipo,id, nombre,tarifas,generos));
 	}
+      
+        
 
 	private static Gen<Integer> ids() {
 	    return integers().allPositive();
@@ -37,8 +39,8 @@ public class GeneratorItem {
 	}
 	
 
-	private static Gen<LocalDate> fechas(){
-		return localDates().withDays(213987831);
+	private static Gen<Date> fechas(){
+		return dates().withMilliseconds(213987831);
 	}
 	
 	

@@ -20,14 +20,13 @@ import static org.quicktheories.QuickTheory.qt;
 import static org.quicktheories.generators.Generate.*;
 import static org.quicktheories.generators.SourceDSL.*;
 
-public class ServiciosAlquilerTest {
+public class test {
 
     @Inject
-    private SqlSession sqlSession;
-
+    private SqlSession sqlSession;    
     ServiciosAlquiler serviciosAlquiler;
 
-    public ServiciosAlquilerTest() {
+    public test() {
         serviciosAlquiler = ServiciosAlquilerFactory.getInstance().getServiciosAlquilerTesting();
     }
 
@@ -38,13 +37,17 @@ public class ServiciosAlquilerTest {
     @Test
     public void emptyDB() {
         qt().forAll(longs().from(1).upTo(1000)).check((documento) -> {
-            boolean r = false;
+            boolean r = true;
+            System.out.println("sfajfaddahfdajkfakfahkfeahk");
             try {
-                Cliente cliente = serviciosAlquiler.consultarCliente(documento);
+                //sqlSession.getConnection();
+                Cliente cliente = serviciosAlquiler.consultarCliente(12345);
+                System.out.println("sfajfaddahfdajkfakfahkfeahk");
+                //return true;
             } catch(ExcepcionServiciosAlquiler e) {
-                r = true;
-            } catch(IndexOutOfBoundsException e) {
-                r = true;
+                r = false;
+            } catch(IndexOutOfBoundsException e){
+                r = false;
             }
             return r;
         });

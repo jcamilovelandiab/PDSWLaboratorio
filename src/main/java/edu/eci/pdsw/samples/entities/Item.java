@@ -21,9 +21,14 @@ public class Item implements Serializable{
     private long tarifaxDia;
     private String formatoRenta;
     private String genero;
+    
+    
+    public Item() {
+    }
+
 
     public Item(TipoItem tipo, int id, String nombre, String descripcion, 
-    Date fechaLanzamiento, long tarifaxDia, String formatoRenta, String genero) {
+            Date fechaLanzamiento, long tarifaxDia, String formatoRenta, String genero) {
         this.tipo = tipo;
         this.id = id;
         this.nombre = nombre;
@@ -33,10 +38,21 @@ public class Item implements Serializable{
         this.formatoRenta = formatoRenta;
         this.genero = genero;
     }
+    
+   
+    public Item(TipoItem tipo, int id, String nombre, long tarifaxDia, String genero) {
+        this.tipo = tipo;
+        this.id = id;
+        this.nombre = nombre;
+        this.genero = genero;
+        this.tarifaxDia = tarifaxDia;
+        //this.descripcion = descripcion;
+        //this.fechaLanzamiento = fechaLanzamiento;
+        //this.formatoRenta = formatoRenta;
+     }
+    
 
-    public Item() {
-    }
-
+  
     
     
     

@@ -63,9 +63,9 @@
         </select>
 
 
-		<update id="actualizarTarifaItem">
-				UPDATE VI_ITEMS it SET it.tarifaxdia=#{tarifa} WHERE it.id=#{idItem};
-		</update>
+	<update id="actualizarTarifaItem">
+		UPDATE VI_ITEMS it SET it.tarifaxdia=#{tarifa} WHERE it.id=#{idItem};
+	</update>
 
 
         <resultMap id = "ItemResult" type = "Item">

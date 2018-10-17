@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title></title>
+</h:head>
+<h:body>
+	<p:button outcome="users" value="Back to block" />
+	<p:dataTable id="blog_table" var="coments" value="#{commentBean.data}">
+            
+            
+            <p:column headerText="Author Login" >
+                 <p:outputLabel value="#{coments.author.login}"/>
+            </p:column>
+            
+            <p:column headerText="Author Nombre" >
+                <p:outputLabel value="#{coments.author.name}"/>
+            </p:column>
+            
+            <p:column headerText="Author Apellido" >
+                 <p:outputLabel value="#{coments.author.lastName}"/>
+            </p:column>
+            
+            <p:column headerText="Comentarios" >
+                <p:outputLabel value="#{coments.content}"/>
+            </p:column>
+            
+            <p:column headerText="Fecha del comentario" >
+                <p:outputLabel value="#{coments.creationDate}"/>
+            </p:column>
+            
+            
+
+	</p:dataTable>
+	
+</h:body> 
+</html>
+
