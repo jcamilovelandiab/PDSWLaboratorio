@@ -35,6 +35,9 @@ import edu.eci.pdsw.sampleprj.dao.mybatis.mappers.ItemRentadoMapper;
 import edu.eci.pdsw.sampleprj.dao.mybatis.mappers.TipoItemMapper;
 import edu.eci.pdsw.samples.entities.Item;
 import edu.eci.pdsw.samples.entities.TipoItem;
+import edu.eci.pdsw.samples.services.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -99,10 +102,10 @@ public class MyBatisExample {
          * 
          */
     
-        
+        /*
         SimpleDateFormat dateformat2 = new SimpleDateFormat("yyyy-M-dd");
     	String strdateInicio = "3917-04-30";
-    	Date newdateStart = dateformat2.parse(strdateInicio);
+    	Date newdateStart = dateformat2.pare(strdateInicio);
         ItemRentadoMapper im = sqlss.getMapper(ItemRentadoMapper.class);
         //System.out.println(im.consultarCostoAlquiler(90,5));
         //im.addTipoItem(new TipoItem(15,));
@@ -111,7 +114,18 @@ public class MyBatisExample {
         Item mm = IT.consultarItem(17);
         System.out.println(cl.consultarClientes());
         //im.registrarAlquilerCliente(newdateStart, Long.parseLong("12345"),mm,6);
-
+        */
+        
+        ServiciosAlquilerFactory serviceA =   ServiciosAlquilerFactory.getInstance();
+        ServiciosAlquiler service = serviceA.getServiciosAlquilerTesting();
+        try {
+                System.out.println(service.consultarCliente(12345));
+            } catch (ExcepcionServiciosAlquiler ex) {
+                Logger.getLogger(MyBatisExample.class.getName()).log(Level.SEVERE, null, ex);
+            }
+       
+    
+ 
         sqlss.commit();
         sqlss.close();
 

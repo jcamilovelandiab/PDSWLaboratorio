@@ -1,3 +1,4 @@
+package edu.eci.pdsw.test;
 
 import org.junit.Before;
 import org.mybatis.guice.XMLMyBatisModule;

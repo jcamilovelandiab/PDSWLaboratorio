@@ -13,13 +13,16 @@ import java.util.logging.Logger;
 import org.mybatis.guice.transactional.Transactional;
 
 @Singleton
-@Transactional
+
 public class ServiciosAlquilerImpl implements ServiciosAlquiler {
 
 	@Inject
 	private ItemDAO itemDAO;
+	@Inject
 	private ClienteDAO clienteDAO;
+	@Inject
 	private TipoItemDAO tipoItemDAO;
+	@Inject
 	private ItemRentadoDAO itemRentadoDAO;
 
 	@Override
@@ -34,9 +37,12 @@ public class ServiciosAlquilerImpl implements ServiciosAlquiler {
 	@Override
 	public Cliente consultarCliente(long docu) throws ExcepcionServiciosAlquiler {
 		try {
+			
 			return clienteDAO.load(docu);
 		} catch (PersistenceException ex) {
+			System.out.println("ANiii");
 			throw new ExcepcionServiciosAlquiler("Error al consultar el cliente " + docu);
+			
 		}
 	}
 
@@ -141,6 +147,7 @@ public class ServiciosAlquilerImpl implements ServiciosAlquiler {
 	}
 
 	@Override
+	//@Transactional 
 	public void registrarItem(Item it) throws ExcepcionServiciosAlquiler {
 		try {
 			itemDAO.save(it);

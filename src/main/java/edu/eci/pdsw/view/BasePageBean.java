@@ -1,4 +1,4 @@
-package edu.eci.pdsw.managedbeans;
+package edu.eci.pdsw.view;
 
 import java.io.Serializable;
 
