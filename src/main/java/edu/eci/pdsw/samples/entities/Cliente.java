@@ -89,7 +89,7 @@ public class Cliente implements Serializable{
     }
 
     public boolean isVetado() {
-        return vetado;
+        return this.vetado;
     }
 
     public void setVetado(boolean betado) {

@@ -22,10 +22,13 @@ public class MyBATISClienteDAO implements ClienteDAO{
     @Override
     public void save(Cliente cl) throws PersistenceException {
         try {
+        		System.out.println("Antes de qui");
+        		System.out.println(cl);
                 clienteMapper.agregarCliente(cl);
-                for (ItemRentado ir : cl.getRentados()){
+                System.out.println("Aqui");
+                /*for (ItemRentado ir : cl.getRentados()){
                         clienteMapper.agregarItemRentadoACliente(cl.getDocumento(),ir.getId(), ir.getFechainiciorenta(), ir.getFechafinrenta());
-                }
+                }*/
         } catch (org.apache.ibatis.exceptions.PersistenceException e) {
                 throw new PersistenceException("Error al registrar el cliente " + cl.toString());
         }

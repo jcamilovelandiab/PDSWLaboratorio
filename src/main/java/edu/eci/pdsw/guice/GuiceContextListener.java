@@ -28,12 +28,11 @@ public class GuiceContextListener implements ServletContextListener {
                 setClassPathResource("mybatis-config.xml");
                 bind(ServiciosAlquiler.class).to(ServiciosAlquilerImpl.class);
                 bind(ClienteDAO.class).to(MyBATISClienteDAO.class);
-	        bind(ItemDAO.class).to(MyBATISItemDAO.class);                   
+                bind(ItemDAO.class).to(MyBATISItemDAO.class);                   
                 bind(ItemRentadoDAO.class).to(MyBATISItemRentadoDAO.class);
                 bind(TipoItemDAO.class).to(MyBATISTipoItemDAO.class);
             }
         });
-        
-           servletContextEvent.getServletContext().setAttribute(Injector.class.getName(), injector);
+        servletContextEvent.getServletContext().setAttribute(Injector.class.getName(), injector);
     }
 }
