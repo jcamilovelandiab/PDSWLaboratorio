@@ -68,7 +68,7 @@
 	<p:separator />
 	
 	<h:form>
-		<p:growl id="growl" showDetail="true" sticky="true" />
+		<p:growl id="alquiler" showDetail="true" sticky="true" />
 		<p:panel header="Alquilar un item">
 			<h:panelGrid columns="2" cellpadding="5">
 				<p:outputLabel value="Digite el id del item que desea alquilar:" />
@@ -78,23 +78,19 @@
 				<p:inputText binding="#{numDias}" />
 
 			</h:panelGrid>
-			
-			<p:commandButton outcome="registrocliente" value = "Alquilar un Item"  
-				actionListener="#{registroAlquilerBean.registrarAlquiler(idItem.value,numDias.value)}" id="boton">
-				<p:confirm header="Confirmation" message="Desea rentar el item ?" />
-			</p:commandButton>
-			
-			<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
-				<h4 id="valor"></h4>
-	        	<p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
-	        	<p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
-	    	</p:confirmDialog>
 
+			<p:commandButton value="Alquilar item" actionListener="#{registroAlquilerBean.registrarAlquiler(idItem.value,numDias.value)}" update="alquiler">
+				<p:confirm header="Confirmation" message="Desea alquilar el item?" icon="ui-icon-alert"/>
+			</p:commandButton>
+			 
+			<p:confirmDialog global="true">
+				<p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"/>
+				<p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close"/>
+			</p:confirmDialog>
+			
 		</p:panel>
 
 	</h:form>
-	
-	<h:outputScript library="js" name="hola.js"  target="body"/>  
 
 	</h:body>
 </html>

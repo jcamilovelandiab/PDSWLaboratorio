@@ -47,6 +47,19 @@ public class RegistroAlquiler extends BasePageBean {
 		}
 	}
 	
+	public long consultarCostoAlquiler(int idItem, int numDias) {
+		FacesContext context = FacesContext.getCurrentInstance();
+		long costoAlquiler=-1;
+		try {
+			costoAlquiler=servicesAlquiler.consultarCostoAlquiler(idItem, numDias);
+		} catch (ExcepcionServiciosAlquiler e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			context.addMessage(null,new FacesMessage(FacesMessage.SEVERITY_FATAL,"Fatal","No se pudo mirar el costo del alquiler"));
+		}
+		return costoAlquiler;
+	}
+	
 	public Long getDocumento() {
 		return this.documento;
 	}

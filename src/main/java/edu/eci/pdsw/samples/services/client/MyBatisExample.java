@@ -119,7 +119,7 @@ public class MyBatisExample {
         ServiciosAlquilerFactory serviceA =   ServiciosAlquilerFactory.getInstance();
         ServiciosAlquiler service = serviceA.getServiciosAlquilerTesting();
         try {
-                System.out.println(service.consultarCliente(12345));
+                System.out.println(service.consultarCostoAlquiler(2131608, 3));
             } catch (ExcepcionServiciosAlquiler ex) {
                 Logger.getLogger(MyBatisExample.class.getName()).log(Level.SEVERE, null, ex);
             }
