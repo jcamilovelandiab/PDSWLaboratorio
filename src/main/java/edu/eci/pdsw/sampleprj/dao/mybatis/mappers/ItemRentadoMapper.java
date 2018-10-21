@@ -22,8 +22,8 @@ public interface ItemRentadoMapper{
      * @param item
      * @param numDias
      */
-    public void registrarAlquilerCliente(@Param("date")Date newdateStart,
-                                        @Param("docu")long docu,
+    public void registrarAlquilerCliente(@Param("date")java.sql.Date date,
+                                        @Param("docu") long docu,
                                         @Param("item")Item item,
                                         @Param("numDias")int numDias);
     

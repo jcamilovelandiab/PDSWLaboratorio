@@ -1,7 +1,7 @@
 package edu.eci.pdsw.view;
 
 import java.util.List;
-
+import java.sql.Date;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
@@ -59,8 +59,8 @@ public class RegistroCliente extends BasePageBean {
 		return this.selectCliente.getDocumento();
 	}
 	
-	public void setDocumento(Long d) {
-		this.documento = d;
+	public void setDocumento(Long doc) {
+		this.documento = doc;
 	}
 	  
     public void onRowSelect(SelectEvent event) {

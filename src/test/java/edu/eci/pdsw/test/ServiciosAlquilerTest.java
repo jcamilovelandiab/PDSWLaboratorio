@@ -35,6 +35,7 @@ public class ServiciosAlquilerTest {
     
     
     private SqlSessionFactory sessionfact;
+
     
     public static SqlSessionFactory getSqlSessionFactory() {
 		SqlSessionFactory sqlSessionFactory = null;
@@ -53,7 +54,6 @@ public class ServiciosAlquilerTest {
     public ServiciosAlquilerTest() {
         serviciosAlquiler = ServiciosAlquilerFactory.getInstance().getServiciosAlquilerTesting();
         sessionfact = getSqlSessionFactory();
-        
     }
 
     @Before
@@ -66,9 +66,8 @@ public class ServiciosAlquilerTest {
             boolean r = true;
             try {
                 sqlSession = sessionfact.openSession();
-                System.out.println(serviciosAlquiler.consultarCliente(12345));
+                System.out.println(documento+" -> "+serviciosAlquiler.consultarCliente(documento));
                 //System.out.println("..ñl.ñ.-.-.l...");
-                
                 sqlSession.commit();
                 sqlSession.close();
 

@@ -8,6 +8,5 @@
 			INSERT INTO VI_ITEMRENTADO(CLIENTES_documento, ITEMS_id, fechainiciorenta, fechafinrenta)
 			VALUES(#{docu},#{item.id},#{date}, DATE_ADD(#{date}, INTERVAL #{numDias} DAY))
 	</insert>
-
 	
 </mapper>

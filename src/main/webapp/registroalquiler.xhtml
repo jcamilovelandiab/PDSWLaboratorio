@@ -7,16 +7,96 @@
 
 <h:head>
 	<center>
-		<title>Registro Cliente</title>
+		<title>Alquiler de Items</title>
 	</center>
 </h:head>
 
 <h:body>
+	<h3>Usuario - #{registroAlquilerBean.documento}</h3>
 	<center>
-		<h1>Registro Cliente #{registroAlquilerBean.documento}</h1>
+		<h1>Alquiler de Items</h1>
 	</center>
+	
+	
+	
 	<h:form>
+		<p:dataTable id="availablesitems_table" var="item"
+			value="#{registroAlquilerBean.data}" scrollable="true"
+			scrollHeight="195">
+			
+			<f:facet name="header">
+        			Items Disponibles
+  			</f:facet>
+  		    
+			<p:column headerText="Id Item">
+				<center>
+					<h:outputText value="#{item.id}" />
+				</center>
+			</p:column>
+
+			<p:column headerText="Nombre">
+				<center>
+					<h:outputText value="#{item.nombre}" />
+				</center>
+			</p:column>
+
+			<p:column headerText="Descripcion">
+				<center>
+					<h:outputText value="#{item.descripcion}" />
+				</center>
+			</p:column>
+
+			<p:column headerText="Genero">
+				<center>
+					<h:outputText value="#{item.genero}" />
+				</center>
+			</p:column>
+
+			<p:column headerText="Fecha de Lanzamiento">
+				<center>
+					<h:outputText value="#{item.fechaLanzamiento}" />
+				</center>
+			</p:column>
+			<p:column headerText="Tarifa diaria">
+				<center>
+					<h:outputText value="#{item.tarifaxDia}" />
+				</center>
+			</p:column>
+			
+			<p:column headerText="Tipo Item">
+				<center>
+					<h:outputText value="#{item.tipo.descripcion}" />
+				</center>
+			</p:column>
+			
+			<f:facet name="footer">
+					<h:outputText value="" />
+			</f:facet>
+		</p:dataTable>
 	</h:form>
+	
+	<p></p>
+	<p:separator />
+	
+	<h:form>
+		<p:growl id="growl" showDetail="true" sticky="true" />
+		<p:panel header="Alquilar un item">
+			<h:panelGrid columns="2" cellpadding="5">
+				<p:outputLabel value="Digite el id del item que desea alquilar:" />
+				<p:inputText binding="#{idItem}" />
+
+				<p:outputLabel value="Digite el numero de dias que desea alquilar el item:" />
+				<p:inputText binding="#{numDias}" />
+
+			</h:panelGrid>
+			<h:commandButton value="Guardar registro" update="user_table"
+				actionListener="#{registroAlquilerBean.registrarAlquiler(registroAlquilerBean.documento.value,idItem.value, numDias.value)}"></h:commandButton>
+
+		</p:panel>
+
+	</h:form>
+
+
 	</h:body>
 </html>
 

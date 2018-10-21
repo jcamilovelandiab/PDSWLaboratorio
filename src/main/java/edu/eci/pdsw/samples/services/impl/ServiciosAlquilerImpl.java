@@ -11,6 +11,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.mybatis.guice.transactional.Transactional;
+import java.sql.Date;
 
 @Singleton
 
@@ -76,7 +77,7 @@ public class ServiciosAlquilerImpl implements ServiciosAlquiler {
 	@Override
 	public List<Item> consultarItemsDisponibles() throws ExcepcionServiciosAlquiler {
 		try {
-			return itemDAO.availableItems();
+			return itemDAO.consultarItemsDisponibles();
 		} catch (PersistenceException ex) {
 			throw new ExcepcionServiciosAlquiler("Error al consultar los items disponibles");
 		}
@@ -110,10 +111,13 @@ public class ServiciosAlquilerImpl implements ServiciosAlquiler {
 	}
 
 	@Override
-	public void registrarAlquilerCliente(Date date, long docu, Item item, int numDias)
-			throws ExcepcionServiciosAlquiler {
+	public void registrarAlquilerCliente(Date date, long docu, Item item, int numDias) throws ExcepcionServiciosAlquiler {
 		try {
+			Cliente cliente = clienteDAO.load(docu);
+			System.out.println("------------------->>> "+docu);
+			if(cliente.isVetado()) throw new ExcepcionServiciosAlquiler("El cliente esta vetado, no puede alquilar ningun item");
 			itemRentadoDAO.registrarAlquilerCliente(date, docu, item, numDias);
+			System.out.println("IMPL: voy a alquilar un item");
 		} catch (PersistenceException ex) {
 			throw new ExcepcionServiciosAlquiler("Error al registrar el alquiler del cliente");
 		}

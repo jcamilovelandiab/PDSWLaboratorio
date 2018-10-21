@@ -36,40 +36,40 @@ public class MyBATISItemDAO implements ItemDAO {
             }
 	}
 
-        @Override
-        public List<Item> availableItems() throws PersistenceException {
-            try {
-                return itemMapper.consultarItemsDisponibles();
-            } catch (org.apache.ibatis.exceptions.PersistenceException e) {
-                throw new PersistenceException("Error al consultar los items disponibles");
-            }
+    @Override
+    public List<Item> consultarItemsDisponibles() throws PersistenceException {
+        try {
+            return itemMapper.consultarItemsDisponibles();
+        } catch (org.apache.ibatis.exceptions.PersistenceException e) {
+            throw new PersistenceException("Error al consultar los items disponibles");
         }
+    }
     
-        @Override
-        public long consultarMultaAlquiler(int idItem, java.util.Date fechaDevolucion) throws PersistenceException {
-            try {
-                return itemMapper.consultarMultaAlquiler(idItem,fechaDevolucion);
-            } catch (org.apache.ibatis.exceptions.PersistenceException e) {
-                throw new PersistenceException("Error al consultar la multa del alquiler del item "+idItem);
-            }
+    @Override
+    public long consultarMultaAlquiler(int idItem, java.util.Date fechaDevolucion) throws PersistenceException {
+        try {
+            return itemMapper.consultarMultaAlquiler(idItem,fechaDevolucion);
+        } catch (org.apache.ibatis.exceptions.PersistenceException e) {
+            throw new PersistenceException("Error al consultar la multa del alquiler del item "+idItem);
         }
+    }
 
-        @Override
-        public long consultarCostoAlquiler(int idItem, int numDias) throws PersistenceException {
-            try {
-                return itemMapper.consultarCostoAlquiler(idItem,numDias);
-            } catch (org.apache.ibatis.exceptions.PersistenceException e) {
-                throw new PersistenceException("Error al consultar el costo del alquiler del item "+idItem);
-            }
+    @Override
+    public long consultarCostoAlquiler(int idItem, int numDias) throws PersistenceException {
+        try {
+            return itemMapper.consultarCostoAlquiler(idItem,numDias);
+        } catch (org.apache.ibatis.exceptions.PersistenceException e) {
+            throw new PersistenceException("Error al consultar el costo del alquiler del item "+idItem);
         }
+    }
 
-        @Override
-        public void actualizarTarifaItem(int idItem, long tarifa) throws PersistenceException {
-            try {
-                itemMapper.actualizarTarifaItem(idItem,tarifa);
-            } catch (org.apache.ibatis.exceptions.PersistenceException e) {
-                throw new PersistenceException("Error al actualizar la tarifa del item "+idItem);
-            }
+    @Override
+    public void actualizarTarifaItem(int idItem, long tarifa) throws PersistenceException {
+        try {
+            itemMapper.actualizarTarifaItem(idItem,tarifa);
+        } catch (org.apache.ibatis.exceptions.PersistenceException e) {
+            throw new PersistenceException("Error al actualizar la tarifa del item "+idItem);
         }
+    }
 
 }
