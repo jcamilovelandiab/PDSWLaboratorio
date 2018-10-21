@@ -12,66 +12,55 @@
 </h:head>
 
 <h:body>
-	<h3>Usuario - #{registroAlquilerBean.documento}</h3>
+	
 	<center>
 		<h1>Alquiler de Items</h1>
 	</center>
 	
+	<f:metadata>
+	    <f:viewParam name="documento" value="#{registroAlquilerBean.documento}" />
+	</f:metadata>
 	
+	<h3> Usuario - #{registroAlquilerBean.documento}</h3>
 	
 	<h:form>
-		<p:dataTable id="availablesitems_table" var="item"
+		<p:dataTable id="availablesitems_table" var="itemr"
 			value="#{registroAlquilerBean.data}" scrollable="true"
 			scrollHeight="195">
 			
 			<f:facet name="header">
-        			Items Disponibles
+        			Items Rentados
   			</f:facet>
   		    
-			<p:column headerText="Id Item">
+			<p:column headerText="Id Item Rentado">
 				<center>
-					<h:outputText value="#{item.id}" />
-				</center>
-			</p:column>
-
-			<p:column headerText="Nombre">
-				<center>
-					<h:outputText value="#{item.nombre}" />
-				</center>
-			</p:column>
-
-			<p:column headerText="Descripcion">
-				<center>
-					<h:outputText value="#{item.descripcion}" />
-				</center>
-			</p:column>
-
-			<p:column headerText="Genero">
-				<center>
-					<h:outputText value="#{item.genero}" />
-				</center>
-			</p:column>
-
-			<p:column headerText="Fecha de Lanzamiento">
-				<center>
-					<h:outputText value="#{item.fechaLanzamiento}" />
-				</center>
-			</p:column>
-			<p:column headerText="Tarifa diaria">
-				<center>
-					<h:outputText value="#{item.tarifaxDia}" />
+					<h:outputText value="#{itemr.id}" />
 				</center>
 			</p:column>
 			
-			<p:column headerText="Tipo Item">
+			<p:column headerText="Nombre Item">
 				<center>
-					<h:outputText value="#{item.tipo.descripcion}" />
+					<h:outputText value="#{itemr.item.nombre}" />
 				</center>
 			</p:column>
+
+			<p:column headerText="Inicio de la renta">
+				<center>
+					<h:outputText value="#{itemr.fechainiciorenta}" />
+				</center>
+			</p:column>
+
+			<p:column headerText="Fin de la renta">
+				<center>
+					<h:outputText value="#{itemr.fechafinrenta}" />
+				</center>
+			</p:column>
+			
 			
 			<f:facet name="footer">
 					<h:outputText value="" />
 			</f:facet>
+			
 		</p:dataTable>
 	</h:form>
 	
@@ -89,13 +78,23 @@
 				<p:inputText binding="#{numDias}" />
 
 			</h:panelGrid>
-			<h:commandButton value="Guardar registro" update="user_table"
-				actionListener="#{registroAlquilerBean.registrarAlquiler(registroAlquilerBean.documento.value,idItem.value, numDias.value)}"></h:commandButton>
+			
+			<p:commandButton outcome="registrocliente" value = "Alquilar un Item"  
+				actionListener="#{registroAlquilerBean.registrarAlquiler(idItem.value,numDias.value)}" id="boton">
+				<p:confirm header="Confirmation" message="Desea rentar el item ?" />
+			</p:commandButton>
+			
+			<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+				<h4 id="valor"></h4>
+	        	<p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+	        	<p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+	    	</p:confirmDialog>
 
 		</p:panel>
 
 	</h:form>
-
+	
+	<h:outputScript library="js" name="hola.js"  target="body"/>  
 
 	</h:body>
 </html>

@@ -61,12 +61,12 @@
 	
 	<select id="consultarItemsCliente" parameterType="map" resultMap="ItemRentadoResult">
 		select       
-	    ir.id ,
+	    ir.id as itemRentadoID,
 	    ir.fechainiciorenta ,
 	    ir.fechafinrenta ,    
-	    i.id ,
+	    i.id as itemID,
 	    i.nombre as itemNombre,
-	    i.descripcion ,
+	    i.descripcion as itemDescripcion,
 	    i.fechalanzamiento ,
 	    i.tarifaxdia ,
 	    i.formatorenta ,
