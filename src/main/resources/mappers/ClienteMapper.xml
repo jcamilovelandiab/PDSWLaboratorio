@@ -67,7 +67,7 @@
 	    i.id as itemID,
 	    i.nombre as itemNombre,
 	    i.descripcion as itemDescripcion,
-	    i.fechalanzamiento ,
+	    i.fechalanzamiento as fechalanzamiento,
 	    i.tarifaxdia ,
 	    i.formatorenta ,
 	    i.genero ,        

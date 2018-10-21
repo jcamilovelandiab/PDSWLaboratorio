@@ -32,6 +32,8 @@ public class RegistroAlquiler extends BasePageBean {
 	public List<ItemRentado> getData() throws Exception {
 		return servicesAlquiler.consultarItemsCliente(documento);
 	}
+	
+	
 
 	public void registrarAlquiler(int idItem, int numDias) {
 		FacesContext context = FacesContext.getCurrentInstance();
@@ -47,13 +49,27 @@ public class RegistroAlquiler extends BasePageBean {
 		}
 	}
 	
+	public long costoMultaAlquler(int idItem)throws ExcepcionServiciosAlquiler{
+		try {
+			long res = 0;
+			if(servicesAlquiler.consultarItem(idItem) != null) {
+				Date fechaDevolucion = Date.valueOf(LocalDate.now());
+				res = servicesAlquiler.consultarMultaAlquiler(idItem, fechaDevolucion);
+			}
+			return res;
+			
+		} catch (ExcepcionServiciosAlquiler e) {
+			e.printStackTrace();
+			throw new ExcepcionServiciosAlquiler("Consto Alquiler/RegistroAlquiler ERROR");
+		}
+	}
+	
 	public long consultarCostoAlquiler(int idItem, int numDias) {
 		FacesContext context = FacesContext.getCurrentInstance();
 		long costoAlquiler=-1;
 		try {
 			costoAlquiler=servicesAlquiler.consultarCostoAlquiler(idItem, numDias);
 		} catch (ExcepcionServiciosAlquiler e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			context.addMessage(null,new FacesMessage(FacesMessage.SEVERITY_FATAL,"Fatal","No se pudo mirar el costo del alquiler"));
 		}
