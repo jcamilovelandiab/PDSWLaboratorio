@@ -26,7 +26,7 @@
 	<h3> Usuario - #{registroAlquilerBean.documento}</h3>
 	
 	<h:form>
-		<p:dataTable id="availablesitems_table" var="itemr"
+		<p:dataTable id="rentados" var="itemr"
 			value="#{registroAlquilerBean.data}" scrollable="true"
 			scrollHeight="195">
 			
@@ -79,8 +79,8 @@
 		<p:remoteCommand name="costoXHTML" 
 						 actionListener="#{registroAlquilerBean.getCostoJS(idItem.value,numDias.value)}"  
 					     oncomplete="costoJS(xhr, status, args)"/>
+					   
 		<p:growl id="alquiler" showDetail="true" sticky="true" />
-		
 		<p:panel header="Alquilar un item" id= "AQ">
 			<h:panelGrid columns="2" cellpadding="5">
 					<p:outputLabel value="Digite el id del item que desea alquilar:" />
@@ -88,9 +88,10 @@
 					<p:outputLabel value="Digite el numero de dias que desea alquilar el item:" />
 					<p:inputText binding="#{numDias}"/>
 			</h:panelGrid>
-			<p:inputText id="doc" binding="#{doc}" value = "#{registroAlquilerBean.documento}" style="display:none"/> 
+			<p:inputText id="doc" binding="#{doc}" value = "#{registroAlquilerBean.documento}" style="display:none"/>
+			
 			<p:commandButton id="boton" value="Alquilar item" 
-							actionListener="#{registroAlquilerBean.registrarAlquiler(idItem.value,numDias.value,doc.value)}">
+							actionListener="#{registroAlquilerBean.registrarAlquiler(idItem.value,numDias.value)}" update="alquiler">
 					<p:confirm header="Confirmation" message="Desea Alquilar este item" icon="ui-icon-alert"/>
 			</p:commandButton>
 				 

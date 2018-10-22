@@ -18,7 +18,9 @@ package edu.eci.pdsw.samples.services.client;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -34,6 +36,7 @@ import edu.eci.pdsw.sampleprj.dao.mybatis.mappers.ItemMapper;
 import edu.eci.pdsw.sampleprj.dao.mybatis.mappers.ItemRentadoMapper;
 import edu.eci.pdsw.sampleprj.dao.mybatis.mappers.TipoItemMapper;
 import edu.eci.pdsw.samples.entities.Item;
+import edu.eci.pdsw.samples.entities.ItemRentado;
 import edu.eci.pdsw.samples.entities.TipoItem;
 import edu.eci.pdsw.samples.services.*;
 import java.util.logging.Level;
@@ -115,23 +118,18 @@ public class MyBatisExample {
         System.out.println(cl.consultarClientes());
         //im.registrarAlquilerCliente(newdateStart, Long.parseLong("12345"),mm,6);
         */
-        /*
+        
         ServiciosAlquilerFactory serviceA =   ServiciosAlquilerFactory.getInstance();
         ServiciosAlquiler service = serviceA.getServiciosAlquilerTesting();
         try {
-        	
-        		Item it = new Item(12222255, "HOLAKHACE",12213123, "(/(/&))", "JEJE%&/%/(~~}^`");
-                service.registrarItem(it);
-                System.out.println("EXCELENTE");
-            } catch (ExcepcionServiciosAlquiler ex) {
-                Logger.getLogger(MyBatisExample.class.getName()).log(Level.SEVERE, null, ex);
-            }
-       */
-        ItemMapper IT = sqlss.getMapper(ItemMapper.class);
-        System.out.println(IT.consultarItem(104));
-        
-    
- 
+        	java.sql.Date date = new java.sql.Date(Calendar.getInstance().getTime().getTime());
+        	Item item = service.consultarItem(2131608);
+        	System.out.println(item);
+        	service.registrarAlquilerCliente(date, 12, item, 2);
+        } catch (ExcepcionServiciosAlquiler ex) {
+            Logger.getLogger(MyBatisExample.class.getName()).log(Level.SEVERE, null, ex);
+        }
+       
         sqlss.commit();
         sqlss.close();
 

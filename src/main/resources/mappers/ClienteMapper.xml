@@ -62,22 +62,22 @@
 	<select id="consultarItemsCliente" parameterType="map" resultMap="ItemRentadoResult">
 		select       
 	    ir.id as itemRentadoID,
-	    ir.fechainiciorenta ,
-	    ir.fechafinrenta ,    
+	    ir.fechainiciorenta,
+	    ir.fechafinrenta,
+	    
 	    i.id as itemID,
 	    i.nombre as itemNombre,
 	    i.descripcion as itemDescripcion,
-	    i.fechalanzamiento as fechalanzamiento,
-	    i.tarifaxdia ,
-	    i.formatorenta ,
-	    i.genero ,        
+	    i.fechalanzamiento,
+	    i.tarifaxdia,
+	    i.formatorenta,
+	    i.genero,  
+	          
 	    ti.id as tipoItemID ,
-	    ti.descripcion     as tipoItemDescripcion
-	    FROM VI_CLIENTES as c 
-	    left join VI_ITEMRENTADO as ir on c.documento=ir.CLIENTES_documento 
-	    left join VI_ITEMS as i on ir.ITEMS_id=i.id 
-	    left join VI_TIPOITEM as ti on i.TIPOITEM_id=ti.id 
-		WHERE c.documento=#{docuCliente}
+	    ti.descripcion as tipoItemDescripcion
+	    FROM VI_CLIENTES as c, VI_ITEMRENTADO as ir, VI_TIPOITEM as ti, VI_ITEMS as i 
+		WHERE c.documento=ir.CLIENTES_documento and ir.ITEMS_id=i.id and i.TIPOITEM_id=ti.id 
+		and c.documento=#{docuCliente}
 	</select>
 	
 	
@@ -118,8 +118,5 @@
 		<result property = "fechafinrenta" column = "fechafinrenta"/>
 		<association property="item" javaType="Item" resultMap="edu.eci.pdsw.sampleprj.dao.mybatis.mappers.ItemMapper.ItemResult"></association>  
 	</resultMap>
-	
-	
-	
-	
+
 </mapper>

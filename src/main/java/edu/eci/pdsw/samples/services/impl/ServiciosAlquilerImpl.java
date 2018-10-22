@@ -112,7 +112,7 @@ public class ServiciosAlquilerImpl implements ServiciosAlquiler {
 	@Override
 	public void registrarAlquilerCliente(Date date, long docu, Item item, int numDias) throws ExcepcionServiciosAlquiler {
 		try {
-			Cliente cliente = clienteDAO.load(docu);
+			//Cliente cliente = clienteDAO.load(docu);
 			//System.out.println("------------------->>> "+docu);
 			//if(cliente.isVetado()) throw new ExcepcionServiciosAlquiler("El cliente esta vetado, no puede alquilar ningun item");
 			itemRentadoDAO.registrarAlquilerCliente(date, docu, item, numDias);

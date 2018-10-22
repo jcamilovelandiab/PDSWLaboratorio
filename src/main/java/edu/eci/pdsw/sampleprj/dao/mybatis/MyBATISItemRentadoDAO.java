@@ -40,7 +40,10 @@ public class MyBATISItemRentadoDAO implements ItemRentadoDAO {
 
     @Override
     public void registrarAlquilerCliente(Date date, long docu, Item item, int numDias) {
+    	System.out.println("MYBATIS -> VOY A REGISTRAR");
+    	System.out.println(item);
         itemRentadoMapper.registrarAlquilerCliente( date,  docu,  item,  numDias);
+        
     }
     
 }

@@ -20,7 +20,7 @@
 	<select parameterType="map" id="getTipoItem" resultMap="TipoItemResult">
 			select  
   			ti.id as tipoItemID,
-    		ti.descripcion as tipoItemDescripcion     
+    		ti.descripcion as tipoItemDescripcion  
   			FROM VI_TIPOITEM as ti
   			WHERE ti.id=#{id}
 	</select>

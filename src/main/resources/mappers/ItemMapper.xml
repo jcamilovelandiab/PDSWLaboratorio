@@ -7,40 +7,40 @@
 	<select parameterType="map" id="consultarItems" resultMap="ItemResult">
 			SELECT
 				vi.id as itemID,
-				ti.descripcion as tipoItemDescripcion,
 				vi.nombre as itemNombre,
 				vi.descripcion as itemDescripcion,
 				vi.fechaLanzamiento,
 				vi.tarifaxdia,
 				vi.formatorenta,
 				vi.genero,
+				ti.descripcion as tipoItemDescripcion,
 				ti.id as tipoItemID	
 			FROM VI_ITEMS as vi , VI_TIPOITEM as ti 
-			WHERE vi.id = ti.id
+			WHERE vi.TIPOITEM_id = ti.id
 			
 	</select>
     
     
         <select parameterType="map" id="consultarItem" resultMap="ItemResult">
-                            SELECT
-                            i.id as itemID,
-                            i.nombre as itemNombre ,
-                            i.descripcion as itemDescripcion,
-                            i.fechalanzamiento ,
-                            i.tarifaxdia ,
-                            i.formatorenta ,
-                            i.genero ,        
-                            ti.id as tipoItemID,
-                            ti.descripcion  as tipoItemDescripcion    
-                            FROM VI_ITEMS as i,VI_TIPOITEM as ti
-                            WHERE  i.TIPOITEM_id=ti.id and i.id = #{id};
+                SELECT
+                i.id as itemID ,
+	            i.nombre as itemNombre,
+	            i.descripcion as itemDescripcion,
+	            i.fechalanzamiento,
+	            i.tarifaxdia,
+	            i.formatorenta,
+	            i.genero,        
+	            ti.id as tipoItemID,
+	            ti.descripcion as tipoItemDescripcion   
+	            FROM VI_ITEMS as i,VI_TIPOITEM as ti
+                WHERE  i.TIPOITEM_id=ti.id and i.id = #{id};
         </select>
     
         <select parameterType="map" id="consultarItemsDisponibles"  resultMap="ItemResult">
                         SELECT  
                         i.id as itemID ,
                         i.nombre as itemNombre,
-                        i.descripcion itemDescripcion,
+                        i.descripcion as itemDescripcion,
                         i.fechalanzamiento,
                         i.tarifaxdia,
                         i.formatorenta,

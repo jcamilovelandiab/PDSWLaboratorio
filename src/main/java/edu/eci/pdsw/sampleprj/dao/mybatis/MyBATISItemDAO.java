@@ -29,9 +29,9 @@ public class MyBATISItemDAO implements ItemDAO {
 	@Override
 	public Item load(int id) throws PersistenceException {
             try {
-                   return itemMapper.consultarItem(id);
+            	System.out.println("CONSULTADO EL ITEM: "+id);
+            	return itemMapper.consultarItem(id);
             } catch (org.apache.ibatis.exceptions.PersistenceException e) {
-            	
                 throw new PersistenceException("Error al consultar el item " + id);
             }
 	}
