@@ -55,7 +55,6 @@ public class RegistroAlquiler extends BasePageBean {
 		FacesContext context = FacesContext.getCurrentInstance();
 		try {
 			java.sql.Date date = new java.sql.Date(Calendar.getInstance().getTime().getTime());
-			System.out.println();
 			Item item = servicesAlquiler.consultarItem(idItem);
 			System.out.println(item);
 			servicesAlquiler.registrarAlquilerCliente(date, Documento, item, numDias);
