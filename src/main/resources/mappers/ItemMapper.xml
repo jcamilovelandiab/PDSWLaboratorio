@@ -5,7 +5,8 @@
   
 	<mapper namespace="edu.eci.pdsw.sampleprj.dao.mybatis.mappers.ItemMapper">
 	<select parameterType="map" id="consultarItems" resultMap="ItemResult">
-			SELECT  vi.id as itemID,
+			SELECT
+				vi.id as itemID,
 				ti.descripcion as tipoItemDescripcion,
 				vi.nombre as itemNombre,
 				vi.descripcion as itemDescripcion,
@@ -13,7 +14,7 @@
 				vi.tarifaxdia,
 				vi.formatorenta,
 				vi.genero,
-				vi.id as tipoItemID	
+				ti.id as tipoItemID	
 			FROM VI_ITEMS as vi , VI_TIPOITEM as ti 
 			WHERE vi.id = ti.id
 			

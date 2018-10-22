@@ -13,15 +13,16 @@
 	
 </h:head>
 <h:body>
-	
+	<f:metadata>
+	    <f:viewParam name="documento" value="#{registroAlquilerBean.documento}" />
+	</f:metadata>
+		
+
 	<center>
 		<h1>Alquiler de Items</h1>
 	</center>
 	
-	<f:metadata>
-	    <f:viewParam name="documento" value="#{registroAlquilerBean.documento}" />
-	</f:metadata>
-	
+
 	<h3> Usuario - #{registroAlquilerBean.documento}</h3>
 	
 	<h:form>
@@ -62,11 +63,10 @@
 					<h:outputText value="#{registroAlquilerBean.costoMultaAlquler(itemr.item.id)}" />
 				</center>
 			</p:column>
-			
-						
+								
 			
 			<f:facet name="footer">
-					<h:outputText value="" />
+					<h:outputText value="Para alquilar el items tenga encuenta que id y la cantidad de dias que lo va tener" />
 			</f:facet>
 			
 		</p:dataTable>
@@ -88,9 +88,9 @@
 					<p:outputLabel value="Digite el numero de dias que desea alquilar el item:" />
 					<p:inputText binding="#{numDias}"/>
 			</h:panelGrid>
-				
+			<p:inputText id="doc" binding="#{doc}" value = "#{registroAlquilerBean.documento}" style="display:none"/> 
 			<p:commandButton id="boton" value="Alquilar item" 
-								 actionListener="#{registroAlquilerBean.registrarAlquiler(idItem.value,numDias.value)}">
+							actionListener="#{registroAlquilerBean.registrarAlquiler(idItem.value,numDias.value,doc.value)}">
 					<p:confirm header="Confirmation" message="Desea Alquilar este item" icon="ui-icon-alert"/>
 			</p:commandButton>
 				 

@@ -42,22 +42,23 @@ public class RegistroAlquiler extends BasePageBean {
 	public void getCostoJS(int id,int numDias) {
 		RequestContext rc = RequestContext.getCurrentInstance();
 	     try {
-	    	System.out.println("......");
-			rc.addCallbackParam("precioCosto", servicesAlquiler.consultarCostoAlquiler(id, numDias));
+	    	rc.addCallbackParam("precioCosto", servicesAlquiler.consultarCostoAlquiler(id, numDias));
 		} catch (ExcepcionServiciosAlquiler e) {
 			e.printStackTrace();
 		}
 	}
 	
 
-	public void registrarAlquiler(int idItem, int numDias) {
-
-		System.out.println("Registro de alquiler es"+ idItem+  " " + numDias);
+	public void registrarAlquiler(int idItem, int numDias,int Documento) {
+		
+		System.out.println("Registro de alquiler es"+ idItem+  " " + numDias +  " " + Documento);
 		FacesContext context = FacesContext.getCurrentInstance();
 		try {
 			java.sql.Date date = new java.sql.Date(Calendar.getInstance().getTime().getTime());
+			System.out.println();
 			Item item = servicesAlquiler.consultarItem(idItem);
-			servicesAlquiler.registrarAlquilerCliente(date, documento, item, numDias);
+			System.out.println(item);
+			servicesAlquiler.registrarAlquilerCliente(date, Documento, item, numDias);
 			context.addMessage(null, new FacesMessage("Successful",  "El Item "+item.getNombre()+" ha sido alquilado sactifactoriamente"));
 			
 		}catch (ExcepcionServiciosAlquiler e) {
