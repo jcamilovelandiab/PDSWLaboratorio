@@ -5,7 +5,8 @@
   
 	<mapper namespace="edu.eci.pdsw.sampleprj.dao.mybatis.mappers.ItemMapper">
 	<select parameterType="map" id="consultarItems" resultMap="ItemResult">
-			SELECT  vi.id as itemID,
+			SELECT
+				vi.id as itemID,
 				ti.descripcion as tipoItemDescripcion,
 				vi.nombre as itemNombre,
 				vi.descripcion as itemDescripcion,
@@ -13,7 +14,7 @@
 				vi.tarifaxdia,
 				vi.formatorenta,
 				vi.genero,
-				vi.id as tipoItemID	
+				ti.id as tipoItemID	
 			FROM VI_ITEMS as vi , VI_TIPOITEM as ti 
 			WHERE vi.id = ti.id
 			
@@ -53,8 +54,13 @@
       	
       	
         <select id="consultarMultaAlquiler" resultType="java.lang.Long">
-            SELECT DATEDIFF(#{fechaDevolucion},(SELECT fechafinrenta FROM VI_ITEMRENTADO itr, VI_ITEMS it WHERE itr.ITEMS_id=it.id AND it.id=#{idItem}))*
-			(SELECT tarifaxdia FROM VI_ITEMS it WHERE it.id=#{idItem}) as multa
+            	SELECT	CASE
+    			WHEN  #{fechaDevolucion}  > fechafinrenta THEN  DATEDIFF(#{fechaDevolucion},fechafinrenta)*tarifaxdia
+				ELSE 0 
+				END as multa
+				FROM VI_ITEMRENTADO itr, VI_ITEMS it
+				WHERE itr.ITEMS_id=it.id and it.id = #{idItem}
+			
         </select>
         
         <select id="consultarCostoAlquiler" resultType="java.lang.Long">

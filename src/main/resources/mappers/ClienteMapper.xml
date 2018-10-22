@@ -50,8 +50,8 @@
 			i.tarifaxdia,
 			i.formatorenta,
 			i.genero,
-			ti.id ,
-			ti.descripcion  
+			ti.id as tipoItemID,
+			ti.descripcion  as as tipoItemDescripcion
 			FROM VI_CLIENTES as c 
 			left join VI_ITEMRENTADO as ir on c.documento=ir.CLIENTES_documento 
 			left join VI_ITEMS as i on ir.ITEMS_id=i.id 
@@ -67,7 +67,7 @@
 	    i.id as itemID,
 	    i.nombre as itemNombre,
 	    i.descripcion as itemDescripcion,
-	    i.fechalanzamiento ,
+	    i.fechalanzamiento as fechalanzamiento,
 	    i.tarifaxdia ,
 	    i.formatorenta ,
 	    i.genero ,        

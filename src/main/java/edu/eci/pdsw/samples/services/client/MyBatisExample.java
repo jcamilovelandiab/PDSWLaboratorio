@@ -115,7 +115,7 @@ public class MyBatisExample {
         System.out.println(cl.consultarClientes());
         //im.registrarAlquilerCliente(newdateStart, Long.parseLong("12345"),mm,6);
         */
-        
+        /*
         ServiciosAlquilerFactory serviceA =   ServiciosAlquilerFactory.getInstance();
         ServiciosAlquiler service = serviceA.getServiciosAlquilerTesting();
         try {
@@ -126,7 +126,10 @@ public class MyBatisExample {
             } catch (ExcepcionServiciosAlquiler ex) {
                 Logger.getLogger(MyBatisExample.class.getName()).log(Level.SEVERE, null, ex);
             }
-       
+       */
+        ItemMapper IT = sqlss.getMapper(ItemMapper.class);
+        System.out.println(IT.consultarItem(104));
+        
     
  
         sqlss.commit();
