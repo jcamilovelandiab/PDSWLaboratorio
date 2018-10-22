@@ -10,6 +10,8 @@ import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 
+import org.primefaces.context.RequestContext;
+
 import edu.eci.pdsw.samples.entities.*;
 import edu.eci.pdsw.samples.services.ExcepcionServiciosAlquiler;
 import edu.eci.pdsw.samples.services.ServiciosAlquiler;
@@ -26,6 +28,8 @@ public class RegistroAlquiler extends BasePageBean {
 	private Long documento;
         
 
+	
+	
 	@Inject
 	private ServiciosAlquiler servicesAlquiler;
 
@@ -33,9 +37,22 @@ public class RegistroAlquiler extends BasePageBean {
 		return servicesAlquiler.consultarItemsCliente(documento);
 	}
 	
+
+
+	public void getCostoJS(int id,int numDias) {
+		RequestContext rc = RequestContext.getCurrentInstance();
+	     try {
+	    	System.out.println("......");
+			rc.addCallbackParam("precioCosto", servicesAlquiler.consultarCostoAlquiler(id, numDias));
+		} catch (ExcepcionServiciosAlquiler e) {
+			e.printStackTrace();
+		}
+	}
 	
 
 	public void registrarAlquiler(int idItem, int numDias) {
+
+		System.out.println("Registro de alquiler es"+ idItem+  " " + numDias);
 		FacesContext context = FacesContext.getCurrentInstance();
 		try {
 			java.sql.Date date = new java.sql.Date(Calendar.getInstance().getTime().getTime());
@@ -65,6 +82,7 @@ public class RegistroAlquiler extends BasePageBean {
 	}
 	
 	public long consultarCostoAlquiler(int idItem, int numDias) {
+		System.out.println("Costo de alquiler es"+ idItem+  " " + numDias);
 		FacesContext context = FacesContext.getCurrentInstance();
 		long costoAlquiler=-1;
 		try {
