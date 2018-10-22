@@ -12,8 +12,8 @@ import edu.eci.pdsw.samples.entities.*;
 
 public class GeneratorCliente {
 	
-	public static Gen<Cliente> Clientes() {
-		return strings().basicLatinAlphabet().ofLengthBetween(10, 50)
+	public static Gen<Cliente> clientes() {
+		return strings().basicLatinAlphabet().ofLengthBetween(10, 20)
 				.zip(documentos(), telefonos(), direcciones(), correos(),
 						(nombre, documento, telefono, direccion, email) -> 
 							new Cliente(nombre, documento, telefono, direccion, email));
@@ -28,11 +28,11 @@ public class GeneratorCliente {
 	}
 	
 	private static Gen<String> direcciones(){
-		return strings().basicLatinAlphabet().ofLengthBetween(10, 60);
+		return strings().basicLatinAlphabet().ofLengthBetween(10, 20);
 	}
 	
 	private static Gen<String> correos(){
-		return strings().basicLatinAlphabet().ofLengthBetween(5, 30).map(x ->  {return x+"@JohnYElVelan.com";});
+		return strings().basicLatinAlphabet().ofLengthBetween(5, 15).map(x ->  {return x+"@JohnYElVelan.com";});
 	}
 	
 }

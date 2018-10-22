@@ -17,43 +17,39 @@ public class GeneratorItem {
 	/*
 	public Item(TipoItem tipo, int id, String nombre, String descripcion, 
 		    Date fechaLanzamiento, long tarifaxDia, String formatoRenta, String genero) */
-	public static Gen<Item> Items() {
-		return GeneratorTipoItem.TiposItems()
-				.zip(ids(), nombres(), tarifaGenerator(),generosGen(),
-						(tipo, id, nombre,tarifas,generos) -> 
-						new Item(tipo,id, nombre,tarifas,generos));
+	public static Gen<Item> items() {
+		return ids()
+				.zip(nombres(), tarifas(), descripciones(), generos(),
+						(id, nombre, tarifa, descripcion, genero) ->
+							new Item(id, nombre, tarifa, descripcion, genero));
 	}
-      
-        
-
+	
 	private static Gen<Integer> ids() {
 	    return integers().allPositive();
 	}
 	
 	private static Gen<String> nombres(){
-		return strings().basicLatinAlphabet().ofLengthBetween(3, 15);
+		return strings().basicLatinAlphabet().ofLengthBetween(3, 15).map(x ->  {return x+"ITEMS DEL JOHN Y EL VELAN";});
 	}
 	
 	private static Gen<String> descripciones(){
-		return strings().basicLatinAlphabet().ofLengthBetween(20, 60);
+		return strings().basicLatinAlphabet().ofLengthBetween(20, 50);
 	}
 	
-
 	private static Gen<Date> fechas(){
 		return dates().withMilliseconds(213987831);
 	}
 	
-	
-	private static Gen<Long> tarifaGenerator(){
+	private static Gen<Long> tarifas(){
 		return longs().all();
 	}
 	
-	private static Gen<String> formatoRentaGen(){
+	private static Gen<String> formatos(){
 		return strings().basicLatinAlphabet().ofLengthBetween(13,16);
 	}
 
-	private static Gen<String> generosGen(){
-		return strings().basicLatinAlphabet().ofLengthBetween(5, 30);
+	private static Gen<String> generos(){
+		return strings().basicLatinAlphabet().ofLengthBetween(5, 10);
 	}
 	
 }

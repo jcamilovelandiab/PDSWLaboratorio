@@ -41,7 +41,6 @@ public class ServiciosAlquilerImpl implements ServiciosAlquiler {
 			
 			return clienteDAO.load(docu);
 		} catch (PersistenceException ex) {
-			System.out.println("ANiii");
 			throw new ExcepcionServiciosAlquiler("Error al consultar el cliente " + docu);
 			
 		}
@@ -114,10 +113,10 @@ public class ServiciosAlquilerImpl implements ServiciosAlquiler {
 	public void registrarAlquilerCliente(Date date, long docu, Item item, int numDias) throws ExcepcionServiciosAlquiler {
 		try {
 			Cliente cliente = clienteDAO.load(docu);
-			System.out.println("------------------->>> "+docu);
-			if(cliente.isVetado()) throw new ExcepcionServiciosAlquiler("El cliente esta vetado, no puede alquilar ningun item");
+			//System.out.println("------------------->>> "+docu);
+			//if(cliente.isVetado()) throw new ExcepcionServiciosAlquiler("El cliente esta vetado, no puede alquilar ningun item");
 			itemRentadoDAO.registrarAlquilerCliente(date, docu, item, numDias);
-			System.out.println("IMPL: voy a alquilar un item");
+			//System.out.println("IMPL: voy a alquilar un item");
 		} catch (PersistenceException ex) {
 			throw new ExcepcionServiciosAlquiler("Error al registrar el alquiler del cliente");
 		}
@@ -156,7 +155,7 @@ public class ServiciosAlquilerImpl implements ServiciosAlquiler {
 		try {
 			itemDAO.save(it);
 		} catch (PersistenceException ex) {
-			throw new ExcepcionServiciosAlquiler("Error al registrar el item");
+			throw new ExcepcionServiciosAlquiler("Error al registrar el item "+it.getId());
 		}
 	}
 

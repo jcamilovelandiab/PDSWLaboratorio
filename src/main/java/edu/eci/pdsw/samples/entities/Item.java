@@ -6,7 +6,8 @@
 package edu.eci.pdsw.samples.entities;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.sql.Date;
+import java.util.Calendar;
 
 /**
  *
@@ -40,22 +41,19 @@ public class Item implements Serializable{
     }
     
    
-    public Item(TipoItem tipo, int id, String nombre, long tarifaxDia, String genero) {
-        this.tipo = tipo;
+    public Item(int id, String nombre, long tarifaxDia, String descripcion, String genero) {
+    	
+        this.tipo = new TipoItem(1,"Video");
         this.id = id;
         this.nombre = nombre;
-        this.genero = genero;
         this.tarifaxDia = tarifaxDia;
-        //this.descripcion = descripcion;
-        //this.fechaLanzamiento = fechaLanzamiento;
-        //this.formatoRenta = formatoRenta;
+        this.descripcion = descripcion;
+        this.genero = genero;
+        this.fechaLanzamiento = new java.sql.Date(Calendar.getInstance().getTime().getTime());
+        this.formatoRenta = "DVD";
      }
-    
 
-  
-    
-    
-    
+
     public TipoItem getTipo() {
         return tipo;
     }
@@ -86,7 +84,7 @@ public class Item implements Serializable{
         return descripcion;
     }
 
-    public void setDescrpcion(String descrpcion) {
+    public void setDescripcion(String descrpcion) {
         this.descripcion = descrpcion;
     }
 

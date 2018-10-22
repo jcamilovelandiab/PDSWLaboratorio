@@ -11,6 +11,7 @@ import edu.eci.pdsw.sampleprj.dao.*;
 import edu.eci.pdsw.sampleprj.dao.mybatis.*;
 import edu.eci.pdsw.samples.services.ServiciosAlquiler;
 import edu.eci.pdsw.samples.services.impl.ServiciosAlquilerImpl;
+import edu.eci.pdsw.samples.services.impl.ServiciosAlquilerItemsStub;
 
 public class GuiceContextListener implements ServletContextListener {
 
@@ -26,11 +27,13 @@ public class GuiceContextListener implements ServletContextListener {
                 install(JdbcHelper.MySQL);
                 setEnvironmentId("development");
                 setClassPathResource("mybatis-config.xml");
-                bind(ServiciosAlquiler.class).to(ServiciosAlquilerImpl.class);
                 bind(ClienteDAO.class).to(MyBATISClienteDAO.class);
                 bind(ItemDAO.class).to(MyBATISItemDAO.class);                   
                 bind(ItemRentadoDAO.class).to(MyBATISItemRentadoDAO.class);
                 bind(TipoItemDAO.class).to(MyBATISTipoItemDAO.class);
+                
+                bind(ServiciosAlquiler.class).to(ServiciosAlquilerImpl.class);
+                //bind(ServiciosAlquiler.class).to(ServiciosAlquilerItemsStub.class);
             }
         });
         servletContextEvent.getServletContext().setAttribute(Injector.class.getName(), injector);

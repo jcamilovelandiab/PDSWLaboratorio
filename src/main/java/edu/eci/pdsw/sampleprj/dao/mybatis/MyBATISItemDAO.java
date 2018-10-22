@@ -22,17 +22,17 @@ public class MyBATISItemDAO implements ItemDAO {
             try {
                   itemMapper.insertarItem(it);
             } catch (org.apache.ibatis.exceptions.PersistenceException e) {
-                  throw new PersistenceException("Error al registrar el item " + it.toString());
+            	throw new PersistenceException("Error al registrar el item " + it.getId());
             }
-
 	}
 
 	@Override
 	public Item load(int id) throws PersistenceException {
             try {
-                    return itemMapper.consultarItem(id);
+                   return itemMapper.consultarItem(id);
             } catch (org.apache.ibatis.exceptions.PersistenceException e) {
-                    throw new PersistenceException("Error al consultar el item " + id);
+            	
+                throw new PersistenceException("Error al consultar el item " + id);
             }
 	}
 
@@ -48,6 +48,7 @@ public class MyBATISItemDAO implements ItemDAO {
     @Override
     public long consultarMultaAlquiler(int idItem, java.util.Date fechaDevolucion) throws PersistenceException {
         try {
+        	if(fechaDevolucion.before(load(idItem).getFechaLanzamiento())) return 0;
             return itemMapper.consultarMultaAlquiler(idItem,fechaDevolucion);
         } catch (org.apache.ibatis.exceptions.PersistenceException e) {
             throw new PersistenceException("Error al consultar la multa del alquiler del item "+idItem);

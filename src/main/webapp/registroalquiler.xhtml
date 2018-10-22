@@ -9,18 +9,20 @@
 	<center>
 		<title>Alquiler de Items</title>
 	</center>
-</h:head>
-
-<h:body>
 	
+	
+</h:head>
+<h:body>
+	<f:metadata>
+	    <f:viewParam name="documento" value="#{registroAlquilerBean.documento}" />
+	</f:metadata>
+		
+
 	<center>
 		<h1>Alquiler de Items</h1>
 	</center>
 	
-	<f:metadata>
-	    <f:viewParam name="documento" value="#{registroAlquilerBean.documento}" />
-	</f:metadata>
-	
+
 	<h3> Usuario - #{registroAlquilerBean.documento}</h3>
 	
 	<h:form>
@@ -40,7 +42,7 @@
 			
 			<p:column headerText="Nombre Item">
 				<center>
-					<h:outputText value="#{itemr.item.nombre}" />
+					<h:outputText value="#{itemr.item.id}" />
 				</center>
 			</p:column>
 
@@ -55,10 +57,16 @@
 					<h:outputText value="#{itemr.fechafinrenta}" />
 				</center>
 			</p:column>
-			
+		
+			<p:column headerText="Multa">
+				<center>
+					<h:outputText value="#{registroAlquilerBean.costoMultaAlquler(itemr.item.id)}" />
+				</center>
+			</p:column>
+								
 			
 			<f:facet name="footer">
-					<h:outputText value="" />
+					<h:outputText value="Para alquilar el items tenga encuenta que id y la cantidad de dias que lo va tener" />
 			</f:facet>
 			
 		</p:dataTable>
@@ -67,30 +75,42 @@
 	<p></p>
 	<p:separator />
 	
-	<h:form>
+	<h:form id = "AlquilerItems">
+		<p:remoteCommand name="costoXHTML" 
+						 actionListener="#{registroAlquilerBean.getCostoJS(idItem.value,numDias.value)}"  
+					     oncomplete="costoJS(xhr, status, args)"/>
 		<p:growl id="alquiler" showDetail="true" sticky="true" />
-		<p:panel header="Alquilar un item">
+		
+		<p:panel header="Alquilar un item" id= "AQ">
 			<h:panelGrid columns="2" cellpadding="5">
-				<p:outputLabel value="Digite el id del item que desea alquilar:" />
-				<p:inputText binding="#{idItem}" />
-
-				<p:outputLabel value="Digite el numero de dias que desea alquilar el item:" />
-				<p:inputText binding="#{numDias}" />
-
+					<p:outputLabel value="Digite el id del item que desea alquilar:" />
+					<p:inputText binding="#{idItem}" />
+					<p:outputLabel value="Digite el numero de dias que desea alquilar el item:" />
+					<p:inputText binding="#{numDias}"/>
 			</h:panelGrid>
-
-			<p:commandButton value="Alquilar item" actionListener="#{registroAlquilerBean.registrarAlquiler(idItem.value,numDias.value)}" update="alquiler">
-				<p:confirm header="Confirmation" message="Desea alquilar el item?" icon="ui-icon-alert"/>
+			<p:inputText id="doc" binding="#{doc}" value = "#{registroAlquilerBean.documento}" style="display:none"/> 
+			<p:commandButton id="boton" value="Alquilar item" 
+							actionListener="#{registroAlquilerBean.registrarAlquiler(idItem.value,numDias.value,doc.value)}">
+					<p:confirm header="Confirmation" message="Desea Alquilar este item" icon="ui-icon-alert"/>
 			</p:commandButton>
-			 
-			<p:confirmDialog global="true">
-				<p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"/>
-				<p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close"/>
-			</p:confirmDialog>
-			
+				 
+			<p:confirmDialog global="true"  showEffect="fade" hideEffect="fade">
+						<h4 id="costo"></h4>
+					<p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"/>
+					<p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close"/>
+			</p:confirmDialog>	
 		</p:panel>
-
 	</h:form>
+	
+	<script type="application/javascript">
+		$("#AlquilerItems\\:boton").on('click',function(e){
+			costoXHTML();
+			window.costoJS = function(xhr, status, args){
+	       			var costoPrro = args.precioCosto;
+	       			$("#costo").text("El valor del costo es "+ costoPrro);
+	    	}});
+	</script>
+
 
 	</h:body>
 </html>

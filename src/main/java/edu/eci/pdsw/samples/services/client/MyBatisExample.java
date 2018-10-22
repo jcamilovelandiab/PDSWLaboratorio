@@ -119,7 +119,10 @@ public class MyBatisExample {
         ServiciosAlquilerFactory serviceA =   ServiciosAlquilerFactory.getInstance();
         ServiciosAlquiler service = serviceA.getServiciosAlquilerTesting();
         try {
-                System.out.println(service.consultarCostoAlquiler(2131608, 3));
+        	
+        		Item it = new Item(12222255, "HOLAKHACE",12213123, "(/(/&))", "JEJE%&/%/(~~}^`");
+                service.registrarItem(it);
+                System.out.println("EXCELENTE");
             } catch (ExcepcionServiciosAlquiler ex) {
                 Logger.getLogger(MyBatisExample.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -129,8 +132,6 @@ public class MyBatisExample {
         sqlss.commit();
         sqlss.close();
 
-        
-        
     }
 
 }

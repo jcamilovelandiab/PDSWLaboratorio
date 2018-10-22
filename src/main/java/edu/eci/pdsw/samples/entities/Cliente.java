@@ -35,7 +35,6 @@ public class Cliente implements Serializable{
         this.vetado = vetado;
         this.rentados = rentados;
     }
-
   
     public Cliente(String nombre, long documento, String telefono, String direccion, String email) {
         this.nombre = nombre;

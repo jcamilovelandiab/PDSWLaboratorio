@@ -12,7 +12,7 @@ import edu.eci.pdsw.samples.entities.*;
 
 public class GeneratorTipoItem {
 	
-	public static Gen<TipoItem> TiposItems() {
+	public static Gen<TipoItem> tiposItems() {
 		return ids().zip(descripciones(),
 						(id,descripcion) -> 
 							new TipoItem(id, descripcion));
