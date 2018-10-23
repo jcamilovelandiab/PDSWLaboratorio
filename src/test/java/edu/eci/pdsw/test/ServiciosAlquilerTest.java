@@ -110,7 +110,7 @@ public class ServiciosAlquilerTest {
         });
     }
     
-    @Test
+    /*@Test
     public void consultarItemsClienteTest() {
     	System.setProperty("QT_EXAMPLES", "10");
         qt().forAll(longs().from(1).upTo(1000)).check((documento) -> {
@@ -132,7 +132,7 @@ public class ServiciosAlquilerTest {
             return r;
         });
         
-    }
+    }*/
     
     
     @Test
