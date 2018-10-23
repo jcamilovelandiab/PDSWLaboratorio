@@ -68,6 +68,7 @@ public class ServiciosAlquilerTest {
     
     @Test
     public void consultarValorMultaRetrasoxDia() {
+	System.setProperty("QT_EXAMPLES", "10");
     	qt().forAll(integers().allPositive()).check((idItem) ->{
     		boolean r = true;
     		try {
@@ -91,6 +92,7 @@ public class ServiciosAlquilerTest {
     
     @Test
     public void consultarClienteTest() {
+	System.setProperty("QT_EXAMPLES", "10");
         qt().forAll(longs().from(1).upTo(1000)).check((documento) -> {
             boolean r = true;
             try {
@@ -110,7 +112,7 @@ public class ServiciosAlquilerTest {
     
     @Test
     public void consultarItemsClienteTest() {
-    	
+    	System.setProperty("QT_EXAMPLES", "10");
         qt().forAll(longs().from(1).upTo(1000)).check((documento) -> {
             boolean r = true;
             try {
@@ -135,6 +137,7 @@ public class ServiciosAlquilerTest {
     
     @Test
     public void consultarItemsTest() {
+	System.setProperty("QT_EXAMPLES", "10");
     	qt().forAll(integers().allPositive()).check((idItem) ->{
     		boolean r = true;
     		try {
@@ -154,6 +157,7 @@ public class ServiciosAlquilerTest {
     
     @Test
     public void consultarMultaAlquilerTest() {
+	System.setProperty("QT_EXAMPLES", "10");
     	qt().forAll(integers().allPositive(), dates().withMilliseconds(0)).check((idItem, fecha) ->{
     		boolean r = true;
     		try {
@@ -178,6 +182,7 @@ public class ServiciosAlquilerTest {
     
     @Test
     public void consultarTiposItemTest() {
+	System.setProperty("QT_EXAMPLES", "10");
     	qt().forAll(integers().from(1).upTo(50)).check((idTipoItem) ->{
     		boolean r = true;
     		try {
@@ -197,7 +202,8 @@ public class ServiciosAlquilerTest {
     @Transactional
     @Test
     public void registrarAlquilerClienteTest() {
-    	qt().forAll(GeneratorCliente.clientes(), GeneratorItem.items(), integers().between(1, 20)).
+    	System.setProperty("QT_EXAMPLES", "10");
+	qt().forAll(GeneratorCliente.clientes(), GeneratorItem.items(), integers().between(1, 20)).
     	check((cl, it, numDias)->{
     		boolean r = true;
     		try {
@@ -238,6 +244,7 @@ public class ServiciosAlquilerTest {
     @Transactional
     @Test
     public void registrarClienteTest() {
+	    System.setProperty("QT_EXAMPLES", "10");
     	qt().forAll(GeneratorCliente.clientes()).check((cliente)->{
     		boolean r = true;
     		try {
@@ -256,6 +263,7 @@ public class ServiciosAlquilerTest {
     
     @Test
     public void consultarCostoAlquilerTest() {
+	    System.setProperty("QT_EXAMPLES", "10");
     	qt().forAll(integers().allPositive(), integers().between(1, 10)).check((idItem, numDias)->{
     		boolean r = true;
     		try {
@@ -275,6 +283,7 @@ public class ServiciosAlquilerTest {
     @Transactional
     @Test
     public void actualizarTarifaItemTest() {
+	    System.setProperty("QT_EXAMPLES", "5");
     	qt().forAll(integers().allPositive(), integers().allPositive()).check((idItem, tarifa)->{
     		boolean r = true;
     		try {
@@ -294,6 +303,7 @@ public class ServiciosAlquilerTest {
     @Transactional
     @Test
     public void registrarItemTest() {
+	    System.setProperty("QT_EXAMPLES", "5");
     	qt().forAll(GeneratorItem.items()).assuming((item) -> {
 			try {
 				return serviciosAlquiler.consultarItem(item.getId())==null;
@@ -327,6 +337,7 @@ public class ServiciosAlquilerTest {
     @Transactional
     @Test
     public void vetarClienteTest() {
+	    System.setProperty("QT_EXAMPLES", "5");
     	qt().forAll(integers().allPositive()).check((documento) -> {
 			boolean r = true;
     		try {
