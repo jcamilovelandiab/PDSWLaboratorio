@@ -15,6 +15,8 @@ En este laboratorio se utilizará un 'framework' de persistencia. La base de dat
 
 ![](img/MODEL.png)
 
+
+
 ## Parte I (Para entregar en clase)
 
 1. Ubique los archivos de configuración para producción de MyBATIS (mybatis-config.xml). Éste está en la ruta donde normalmente se ubican los archivos de configuración de aplicaciones montadas en Maven (src/main/resources). Edítelos y agregue en éste, después de la sección &lt;settings&gt; los siguientes 'typeAliases':
