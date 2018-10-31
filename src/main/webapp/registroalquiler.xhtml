@@ -91,8 +91,7 @@
 			<p:inputText id="doc" binding="#{doc}" value = "#{registroAlquilerBean.documento}" style="display:none"/>
 			
 			<p:commandButton id="boton" value="Alquilar item" 
-							actionListener="#{registroAlquilerBean.registrarAlquiler(idItem.value,numDias.value)}"
-					update="alquiler" >
+							actionListener="#{registroAlquilerBean.registrarAlquiler(idItem.value,numDias.value)}" update="alquiler">
 					<p:confirm header="Confirmation" message="Desea Alquilar este item" icon="ui-icon-alert"/>
 			</p:commandButton>
 				 
